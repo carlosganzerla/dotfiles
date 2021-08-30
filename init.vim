@@ -88,6 +88,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-abolish'
 Plug 'jpalardy/vim-slime'
+Plug 'tribela/vim-transparent'
 call plug#end()
 
 " Disable mouse
