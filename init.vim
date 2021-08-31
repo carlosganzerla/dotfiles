@@ -299,5 +299,4 @@ noremap <Right> <Nop>
 nnoremap <nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
 nnoremap <nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
 
-" Vim Slime target
-let g:slime_target = "x11"
+let g:slime_target = "kitty"
