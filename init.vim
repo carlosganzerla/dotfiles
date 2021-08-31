@@ -139,7 +139,6 @@ nnoremap <C-F5> :redraw!<CR>
 " coc config
 let g:coc_global_extensions = [
   \ 'coc-snippets',
-  \ 'coc-pairs',
   \ 'coc-tsserver',
   \ 'coc-eslint',
   \ 'coc-pyright',
