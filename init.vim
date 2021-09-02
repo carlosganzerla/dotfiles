@@ -106,16 +106,16 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
 " Leader key
-let mapleader=","
+let mapleader=" "
 
 " Nerd tree bindings
 nnoremap <C-b> :NERDTreeToggle<CR>
 
 " Vs Code bindings
-nnoremap <Leader>w <C-w>
-nnoremap <C-Right> :bnext<CR>
-nnoremap <C-Left> :bprevious<CR>
-nnoremap <C-w> :bd<CR>
+nnoremap <silent> <Leader> <C-w>
+nnoremap <silent> <C-Right> :bnext<CR>
+nnoremap <silent> <C-Left> :bprevious<CR>
+nnoremap <silent> <C-w> :bd<CR>
 
  " Load .vimrc onto another buffer
 nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
@@ -129,7 +129,7 @@ command! Eslint
 command! -nargs=1 Grep execute 'grep -lir <f-args> `git ls-files`'
 
 " Clear trailing whitespace
-nnoremap <leader><Space> :%s/\s\+$//e<CR>
+command! TrimTrailing execute ':%s/\s\+$//e'
 
 " Save file
 nnoremap <C-s> :w<CR>
@@ -295,7 +295,8 @@ noremap <Right> <Nop>
 "" Go back to normal in :norm : C-v ESC
 
 " COC scroll floating window
-nnoremap <nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
-nnoremap <nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+nnoremap <nowait><expr> <leader>d coc#float#has_scroll() ? coc#float#scroll(1) : "\<leader>d"
+nnoremap <nowait><expr> <leader>u coc#float#has_scroll() ? coc#float#scroll(0) : "\<leader>u"
 
+" Vim Slime target
 let g:slime_target = "kitty"
