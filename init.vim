@@ -111,11 +111,15 @@ let mapleader=" "
 " Nerd tree bindings
 nnoremap <C-b> :NERDTreeToggle<CR>
 
-" Vs Code bindings
-nnoremap <silent> <Leader> <C-w>
+" Navigation bindings
 nnoremap <silent> <C-Right> :bnext<CR>
 nnoremap <silent> <C-Left> :bprevious<CR>
-nnoremap <silent> <C-w> :bd<CR>
+nnoremap <silent> <C-q> :bd<CR>
+
+nnoremap <C-l> <C-W>l
+nnoremap <C-k> <C-W>k
+nnoremap <C-j> <C-W>j
+nnoremap <C-h> <C-W>h
 
  " Load .vimrc onto another buffer
 nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
@@ -238,21 +242,21 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <leader>e  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
 " List only non ignored files in CTRL P fuzzy find
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
