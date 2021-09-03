@@ -76,19 +76,16 @@ noremap <F6> :source ~/.config/nvim/init.vim<CR>
 
 call plug#begin('~/.config/autoload/plugged')
 Plug 'tomasiser/vim-code-dark'
-if !has('nvim')
-    Plug 'rhysd/vim-healthcheck'
-endif
 Plug 'preservim/nerdtree'
 Plug 'kamykn/spelunker.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-abolish'
-Plug 'jpalardy/vim-slime'
 Plug 'tribela/vim-transparent'
+Plug 'vlime/vlime', {'rtp': 'vim/'}
+" Plug 'kovisoft/paredit'
 call plug#end()
 
 " Disable mouse
@@ -164,9 +161,6 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -302,5 +296,13 @@ noremap <Right> <Nop>
 nnoremap <nowait><expr> <leader>d coc#float#has_scroll() ? coc#float#scroll(1) : "\<leader>d"
 nnoremap <nowait><expr> <leader>u coc#float#has_scroll() ? coc#float#scroll(0) : "\<leader>u"
 
-" Vim Slime target
-let g:slime_target = "kitty"
+" Vlime leader key
+let g:vlime_leader = ","
+let g:vlime_force_default_keys=1 
+" Vlime stuff
+augroup CustomVlimeInputBuffer
+    autocmd!
+    autocmd FileType vlime_input inoremap <silent> <buffer> <tab> <c-r>=vlime#plugin#VlimeKey("tab")<cr>
+    autocmd FileType vlime_input setlocal omnifunc=vlime#plugin#CompleteFunc
+    autocmd FileType vlime_input setlocal indentexpr=vlime#plugin#CalcCurIndent()
+augroup end
