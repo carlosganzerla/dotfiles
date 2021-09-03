@@ -85,7 +85,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-abolish'
 Plug 'tribela/vim-transparent'
 Plug 'vlime/vlime', {'rtp': 'vim/'}
-" Plug 'kovisoft/paredit'
+Plug 'kovisoft/paredit'
 call plug#end()
 
 " Disable mouse
