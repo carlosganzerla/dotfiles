@@ -84,8 +84,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-abolish'
 Plug 'tribela/vim-transparent'
-Plug 'vlime/vlime', {'rtp': 'vim/'}
-Plug 'kovisoft/paredit'
+Plug 'kovisoft/slimv'
 call plug#end()
 
 " Disable mouse
@@ -106,7 +105,7 @@ let g:netrw_winsize = 25
 let mapleader=" "
 
 " Nerd tree bindings
-nnoremap <C-b> :NERDTreeToggle<CR>
+nnoremap <silent> <C-b> :NERDTreeToggle<CR>
 
 " Navigation bindings
 nnoremap <silent> <C-Right> :bnext<CR>
@@ -296,13 +295,5 @@ noremap <Right> <Nop>
 nnoremap <nowait><expr> <leader>d coc#float#has_scroll() ? coc#float#scroll(1) : "\<leader>d"
 nnoremap <nowait><expr> <leader>u coc#float#has_scroll() ? coc#float#scroll(0) : "\<leader>u"
 
-" Vlime leader key
-let g:vlime_leader = ","
-let g:vlime_force_default_keys=1 
-" Vlime stuff
-augroup CustomVlimeInputBuffer
-    autocmd!
-    autocmd FileType vlime_input inoremap <silent> <buffer> <tab> <c-r>=vlime#plugin#VlimeKey("tab")<cr>
-    autocmd FileType vlime_input setlocal omnifunc=vlime#plugin#CompleteFunc
-    autocmd FileType vlime_input setlocal indentexpr=vlime#plugin#CalcCurIndent()
-augroup end
+
+autocmd FileType lisp,clj set omnifunc=SlimvOmniComplete
