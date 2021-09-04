@@ -297,3 +297,6 @@ nnoremap <nowait><expr> <leader>u coc#float#has_scroll() ? coc#float#scroll(0) :
 
 
 autocmd FileType lisp,clj set omnifunc=SlimvOmniComplete
+
+let g:slimv_swank_cmd = '! kitty --single-instance sbcl --load ~/.config/autoload/plugged/slimv/slime/start-swank.lisp &'
+
