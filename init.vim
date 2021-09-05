@@ -296,7 +296,14 @@ nnoremap <nowait><expr> <leader>d coc#float#has_scroll() ? coc#float#scroll(1) :
 nnoremap <nowait><expr> <leader>u coc#float#has_scroll() ? coc#float#scroll(0) : "\<leader>u"
 
 
-autocmd FileType lisp,clj set omnifunc=SlimvOmniComplete
+augroup slimv
+  autocmd!
+  autocmd FileType lisp,clj set omnifunc=SlimvOmniComplete
+  autocmd FileType lisp,clj nnoremap <silent> gh :call SlimvDescribeSymbol()<CR>
+  autocmd FileType lisp,clj nnoremap <silent> gd :call SlimvFindDefinitions()<CR>
+augroup end
 
 let g:slimv_swank_cmd = '! kitty --single-instance sbcl --load ~/.config/autoload/plugged/slimv/slime/start-swank.lisp &'
-
+let g:slimv_repl_split=4
+let g:slimv_repl_syntax=0
+let g:slimv_ctags='ctags'
