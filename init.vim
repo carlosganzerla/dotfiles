@@ -294,7 +294,10 @@ endfunction
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
-noremap <Right> <Nop>
+noremap <right> <nop>
+
+" Disable quit
+noremap <C-w><C-q> <nop>
 
 "" Go back to normal in :norm : C-v ESC
 
