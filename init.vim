@@ -76,19 +76,15 @@ noremap <F6> :source ~/.config/nvim/init.vim<CR>
 
 call plug#begin('~/.config/autoload/plugged')
 Plug 'tomasiser/vim-code-dark'
-if !has('nvim')
-    Plug 'rhysd/vim-healthcheck'
-endif
 Plug 'preservim/nerdtree'
 Plug 'kamykn/spelunker.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-abolish'
-Plug 'jpalardy/vim-slime'
 Plug 'tribela/vim-transparent'
+Plug 'kovisoft/slimv'
 call plug#end()
 
 " Disable mouse
@@ -109,7 +105,7 @@ let g:netrw_winsize = 25
 let mapleader=" "
 
 " Nerd tree bindings
-nnoremap <C-b> :NERDTreeToggle<CR>
+nnoremap <silent> <C-b> :NERDTreeToggle<CR>
 
 " Navigation bindings
 nnoremap <silent> <C-Right> :bnext<CR>
@@ -164,9 +160,6 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -305,5 +298,15 @@ noremap <C-w><C-q> <nop>
 nnoremap <nowait><expr> <leader>d coc#float#has_scroll() ? coc#float#scroll(1) : "\<leader>d"
 nnoremap <nowait><expr> <leader>u coc#float#has_scroll() ? coc#float#scroll(0) : "\<leader>u"
 
-" Vim Slime target
-let g:slime_target = "kitty"
+
+augroup slimv
+  autocmd!
+  autocmd FileType lisp,clj set omnifunc=SlimvOmniComplete
+  autocmd FileType lisp,clj nnoremap <silent> gh :call SlimvDescribeSymbol()<CR>
+  autocmd FileType lisp,clj nnoremap <silent> gd :call SlimvFindDefinitions()<CR>
+augroup end
+
+let g:slimv_swank_cmd = '! kitty --single-instance sbcl --load ~/.config/autoload/plugged/slimv/slime/start-swank.lisp &'
+let g:slimv_repl_split=4
+let g:slimv_repl_syntax=0
+let g:slimv_ctags='ctags'
