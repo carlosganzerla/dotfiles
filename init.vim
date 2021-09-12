@@ -295,7 +295,7 @@ noremap <Right> <Nop>
 nnoremap <nowait><expr> <leader>d coc#float#has_scroll() ? coc#float#scroll(1) : "\<leader>d"
 nnoremap <nowait><expr> <leader>u coc#float#has_scroll() ? coc#float#scroll(0) : "\<leader>u"
 
-
+" Add current coc.nvim mappings for SLIMV 
 augroup slimv
   autocmd!
   autocmd FileType lisp,clj set omnifunc=SlimvOmniComplete
@@ -303,7 +303,12 @@ augroup slimv
   autocmd FileType lisp,clj nnoremap <silent> gd :call SlimvFindDefinitions()<CR>
 augroup end
 
+" SWANK server startup command
 let g:slimv_swank_cmd = '! kitty --single-instance sbcl --load ~/.config/autoload/plugged/slimv/slime/start-swank.lisp &'
+" Set vertical split for SLIMV REPL
 let g:slimv_repl_split=4
+" Disable Syntax Highlight on REPL
 let g:slimv_repl_syntax=0
 let g:slimv_ctags='ctags'
+" Matching parens with color
+let g:lisp_rainbow=1
