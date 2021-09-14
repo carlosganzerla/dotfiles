@@ -298,12 +298,20 @@ noremap <C-w><C-q> <nop>
 nnoremap <nowait><expr> <leader>d coc#float#has_scroll() ? coc#float#scroll(1) : "\<leader>d"
 nnoremap <nowait><expr> <leader>u coc#float#has_scroll() ? coc#float#scroll(0) : "\<leader>u"
 
+" Show arglist for current symbol
+
+function! ShowSlimvArglist()
+  let col = col('.')
+  let line = line('.')
+  execute SlimvArglist(line, col + 1)
+endfunction
 " Add current coc.nvim mappings for SLIMV 
 augroup slimv
   autocmd!
   autocmd FileType lisp,clj set omnifunc=SlimvOmniComplete
   autocmd FileType lisp,clj nnoremap <silent> gh :call SlimvDescribeSymbol()<CR>
   autocmd FileType lisp,clj nnoremap <silent> gd :call SlimvFindDefinitions()<CR>
+  autocmd CursorHold *.lisp,*.clj  call ShowSlimvArglist()
 augroup end
 
 " SWANK server startup command
@@ -313,5 +321,3 @@ let g:slimv_repl_split=4
 " Disable Syntax Highlight on REPL
 let g:slimv_repl_syntax=0
 let g:slimv_ctags='ctags'
-" Matching parens with color
-let g:lisp_rainbow=1
