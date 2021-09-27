@@ -311,7 +311,7 @@ augroup slimv
   autocmd FileType lisp,clj set omnifunc=SlimvOmniComplete
   autocmd FileType lisp,clj nnoremap <silent> gh :call SlimvDescribeSymbol()<CR>
   autocmd FileType lisp,clj nnoremap <silent> gd :call SlimvFindDefinitions()<CR>
-  autocmd CursorHold *.lisp,*.clj  call ShowSlimvArglist()
+  autocmd FileType lisp,clj nnoremap <silent> gi :call ShowSlimvArglist()<CR>
 augroup end
 
 " SWANK server startup command
@@ -321,3 +321,4 @@ let g:slimv_repl_split=4
 " Disable Syntax Highlight on REPL
 let g:slimv_repl_syntax=0
 let g:slimv_ctags='ctags'
+let g:lisp_rainbow=1
