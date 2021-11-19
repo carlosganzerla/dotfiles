@@ -322,3 +322,7 @@ let g:slimv_repl_split=4
 let g:slimv_repl_syntax=0
 let g:slimv_ctags='ctags'
 let g:lisp_rainbow=1
+
+" Set lisp automatically for .asd files
+autocmd BufNewFile,BufRead *.asd :set filetype=lisp
+map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>

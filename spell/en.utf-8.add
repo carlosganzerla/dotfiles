@@ -1,0 +1,15 @@
+defun
+cadr
+progn
+defconstant
+zerop
+svref
+funcall
+aref
+nreverse
+destructuring-bind
+princ
+defpackage
+incf
+defvar
+gensym
