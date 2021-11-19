@@ -293,6 +293,7 @@ noremap <right> <nop>
 noremap <C-w><C-q> <nop>
 
 "" Go back to normal in :norm : C-v ESC
+"" Pasre on command mode (:) (C-r + <reg> )
 
 " COC scroll floating window
 nnoremap <nowait><expr> <leader>d coc#float#has_scroll() ? coc#float#scroll(1) : "\<leader>d"
@@ -322,3 +323,5 @@ let g:slimv_repl_split=4
 let g:slimv_repl_syntax=0
 let g:slimv_ctags='ctags'
 let g:lisp_rainbow=1
+
+noremap <silent> <leader>c :bp\|bd #<CR>
