@@ -293,6 +293,7 @@ noremap <right> <nop>
 noremap <C-w><C-q> <nop>
 
 "" Go back to normal in :norm : C-v ESC
+"" Pasre on command mode (:) (C-r + <reg> )
 
 " COC scroll floating window
 nnoremap <nowait><expr> <leader>d coc#float#has_scroll() ? coc#float#scroll(1) : "\<leader>d"
@@ -325,4 +326,4 @@ let g:lisp_rainbow=1
 
 " Set lisp automatically for .asd files
 autocmd BufNewFile,BufRead *.asd :set filetype=lisp
-map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+noremap <silent> <leader>c :bp\|bd #<CR>
