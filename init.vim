@@ -325,3 +325,5 @@ let g:slimv_ctags='ctags'
 let g:lisp_rainbow=1
 
 noremap <silent> <leader>c :bp\|bd #<CR>
+
+" command! -nargs=0 DocFormat :norm I**^[Ea**:^[wi`^[Ea`.^[lD
