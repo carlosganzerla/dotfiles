@@ -321,7 +321,6 @@ let g:slimv_swank_cmd = '! kitty --single-instance sbcl --load ~/.config/autoloa
 let g:slimv_repl_split=4
 " Disable Syntax Highlight on REPL
 let g:slimv_repl_syntax=0
-let g:slimv_ctags='ctags'
 let g:lisp_rainbow=1
 let g:slimv_repl_split_size=60
 
