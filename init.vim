@@ -313,6 +313,7 @@ augroup slimv
   autocmd FileType lisp,clj nnoremap <silent> gh :call SlimvDescribeSymbol()<CR>
   autocmd FileType lisp,clj nnoremap <silent> gd :call SlimvFindDefinitions()<CR>
   autocmd FileType lisp,clj nnoremap <silent> gi :call ShowSlimvArglist()<CR>
+  autocmd FileType lisp,clj nnoremap <silent> <C-C> :call SlimvInterrupt()<CR>
 augroup end
 
 " SWANK server startup command
@@ -327,3 +328,6 @@ let g:slimv_repl_split_size=60
 " Set lisp automatically for .asd files
 autocmd BufNewFile,BufRead *.asd :set filetype=lisp
 noremap <silent> <leader>c :bp\|bd #<CR>
+
+" Set 85 length
+nnoremap <silent> <leader>w :vertical resize 85<CR>
