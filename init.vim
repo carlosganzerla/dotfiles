@@ -2,6 +2,7 @@
 "
  "You want Vim, not vi. When Vim finds a vimrc, 'nocompatible' is set anyway.
 " We set it explicitly to make our position clear!
+"
 set nocompatible
 
 " Change highlighting of cursor line when entering/leaving Insert Mode
@@ -85,6 +86,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-abolish'
 Plug 'tribela/vim-transparent'
 Plug 'kovisoft/slimv'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " Disable mouse
@@ -306,7 +310,7 @@ function! ShowSlimvArglist()
   let line = line('.')
   execute SlimvArglist(line, col + 1)
 endfunction
-" Add current coc.nvim mappings for SLIMV 
+" Add current coc.nvim mappings for SLIMV
 augroup slimv
   autocmd!
   autocmd FileType lisp,clj set omnifunc=SlimvOmniComplete
