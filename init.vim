@@ -75,7 +75,7 @@ noremap <F5> :buffers<CR>:buffer<Space>
 noremap <F6> :source ~/.config/nvim/init.vim<CR>
 
 call plug#begin('~/.config/autoload/plugged')
-Plug 'tomasiser/vim-code-dark'
+Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'kamykn/spelunker.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -92,7 +92,7 @@ set mouse=
 " VS Code like colors
 set t_Co=256
 set t_ut=
-colorscheme codedark
+colorscheme gruvbox
 
 " Show Tree
 let g:netrw_banner = 0
@@ -313,6 +313,7 @@ augroup slimv
   autocmd FileType lisp,clj nnoremap <silent> gh :call SlimvDescribeSymbol()<CR>
   autocmd FileType lisp,clj nnoremap <silent> gd :call SlimvFindDefinitions()<CR>
   autocmd FileType lisp,clj nnoremap <silent> gi :call ShowSlimvArglist()<CR>
+  autocmd FileType lisp,clj nnoremap <silent> <C-C> :call SlimvInterrupt()<CR>
 augroup end
 
 " SWANK server startup command
@@ -321,9 +322,12 @@ let g:slimv_swank_cmd = '! kitty --single-instance sbcl --load ~/.config/autoloa
 let g:slimv_repl_split=4
 " Disable Syntax Highlight on REPL
 let g:slimv_repl_syntax=0
-let g:slimv_ctags='ctags'
 let g:lisp_rainbow=1
+let g:slimv_repl_split_size=60
 
+" Set lisp automatically for .asd files
+autocmd BufNewFile,BufRead *.asd :set filetype=lisp
 noremap <silent> <leader>c :bp\|bd #<CR>
 
-" command! -nargs=0 DocFormat :norm I**^[Ea**:^[wi`^[Ea`.^[lD
+" Set 85 length
+nnoremap <silent> <leader>w :vertical resize 85<CR>
