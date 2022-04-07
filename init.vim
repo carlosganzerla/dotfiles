@@ -1,4 +1,4 @@
- " A (not so) minimal vimrc.
+" A (not so) minimal vimrc.
 "
  "You want Vim, not vi. When Vim finds a vimrc, 'nocompatible' is set anyway.
 " We set it explicitly to make our position clear!
@@ -15,6 +15,7 @@ set tabstop =4         " Tab key indents by 4 spaces.
 set shiftwidth  =4         " >> indents by 4 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 set sm
+set wfw " Fixed width
 
 " set spell spelllang=en_us   " Spell checker
 set nospell
@@ -87,8 +88,6 @@ Plug 'tpope/vim-abolish'
 Plug 'tribela/vim-transparent'
 Plug 'kovisoft/slimv'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " Disable mouse
@@ -313,11 +312,11 @@ endfunction
 " Add current coc.nvim mappings for SLIMV
 augroup slimv
   autocmd!
-  autocmd FileType lisp,clj set omnifunc=SlimvOmniComplete
-  autocmd FileType lisp,clj nnoremap <silent> gh :call SlimvDescribeSymbol()<CR>
-  autocmd FileType lisp,clj nnoremap <silent> gd :call SlimvFindDefinitions()<CR>
-  autocmd FileType lisp,clj nnoremap <silent> gi :call ShowSlimvArglist()<CR>
-  autocmd FileType lisp,clj nnoremap <silent> <C-C> :call SlimvInterrupt()<CR>
+  autocmd FileType lisp set omnifunc=SlimvOmniComplete
+  autocmd FileType lisp nnoremap <silent> gh :call SlimvDescribeSymbol()<CR>
+  autocmd FileType lisp nnoremap <silent> gd :call SlimvFindDefinitions()<CR>
+  autocmd FileType lisp nnoremap <silent> gi :call ShowSlimvArglist()<CR>
+  autocmd FileType lisp,scheme nnoremap <silent> <C-C> :call SlimvInterrupt()<CR>
 augroup end
 
 " SWANK server startup command
@@ -328,6 +327,11 @@ let g:slimv_repl_split=4
 let g:slimv_repl_syntax=0
 let g:lisp_rainbow=1
 let g:slimv_repl_split_size=60
+
+" SWANK with Scheme
+
+let g:scheme_builtin_swank = 1
+let g:slimv_swank_scheme = '! kitty --single-instance mit-scheme --load ~/.config/autoload/plugged/slimv/slime/contrib/swank-mit-scheme.scm &'
 
 " Set lisp automatically for .asd files
 autocmd BufNewFile,BufRead *.asd :set filetype=lisp
