@@ -15,7 +15,6 @@ set tabstop =4         " Tab key indents by 4 spaces.
 set shiftwidth  =4         " >> indents by 4 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 set sm
-set wfw " Fixed width
 
 " set spell spelllang=en_us   " Spell checker
 set nospell
@@ -52,7 +51,6 @@ set splitright             " Open new windows right of the current window.
 set path+=**                " Fuzzy file search enabled
 set wildignore+=**/node_modules/**
 set wildignore+=**/__pycache__/**
-set cursorline             " Find the current line quickly.
 set wrapscan               " Searches wrap around end-of-file.
 set report      =0         " Always report changed lines.
 set synmaxcol   =200       " Only highlight the first 200 columns.
@@ -88,6 +86,7 @@ Plug 'tpope/vim-abolish'
 Plug 'tribela/vim-transparent'
 Plug 'kovisoft/slimv'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'jremmen/vim-ripgrep'
 call plug#end()
 
 " Disable mouse
@@ -107,18 +106,54 @@ let g:netrw_winsize = 25
 " Leader key
 let mapleader=" "
 
+" when in normal mode, stop highlighting search results
+nnoremap <silent> <Esc> :nohlsearch<CR>
+
+" replace the word under the cursor in the current file
+nnoremap <Leader>fr :%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left>
+" replace the selection in the current file
+xnoremap <Leader>fr "sy:%s/<C-r>s/<C-r>s/g<Left><Left>
+
 " Nerd tree bindings
 nnoremap <silent> <C-b> :NERDTreeToggle<CR>
 
-" Navigation bindings
+" Kills all buffers then reopens the current one
+function! KillOtherBuffers()
+  %bd|e#
+endfunction
+
+command! -nargs=0 KillOtherBuffers call KillOtherBuffers()
+
+" Kills buffer without messing windows
+noremap <silent> <leader>c :bp\|bd #<CR>
+
+" Set 85 length on vertical split
+nnoremap <silent> <leader>w :vertical resize 85<CR>
+
+" Navigation on Buffers
 nnoremap <silent> <C-Right> :bnext<CR>
 nnoremap <silent> <C-Left> :bprevious<CR>
 nnoremap <silent> <C-q> :bd<CR>
+nnoremap <silent> <C-a> :KillOtherBuffers<CR>
 
+" Swap windowis with Ctrl + direction
 nnoremap <C-l> <C-W>l
 nnoremap <C-k> <C-W>k
 nnoremap <C-j> <C-W>j
 nnoremap <C-h> <C-W>h
+
+" quickfix list navigation
+nnoremap ]c :cnext<CR>
+nnoremap [c :cprev<CR>
+
+" location list navigation
+nnoremap ]l :lnext<CR>
+nnoremap [l :lprev<CR>
+
+" search the word under the cursor in the project
+nnoremap <silent> <Leader>ps :Rg <C-r><C-w><CR>
+" search the selection in the project
+xnoremap <Leader>ps "sy:Rg <C-r>s<CR>
 
  " Load .vimrc onto another buffer
 nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
@@ -127,9 +162,6 @@ nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
 command! Eslint
             \ execute 'silent !eslint %:p --quiet --fix'
             \ | redraw!
-
-" Grep with git
-command! -nargs=1 Grep execute 'grep -lir <f-args> `git ls-files`'
 
 " Clear trailing whitespace
 command! TrimTrailing execute ':%s/\s\+$//e'
@@ -335,7 +367,3 @@ let g:slimv_swank_scheme = '! kitty --single-instance mit-scheme --load ~/.confi
 
 " Set lisp automatically for .asd files
 autocmd BufNewFile,BufRead *.asd :set filetype=lisp
-noremap <silent> <leader>c :bp\|bd #<CR>
-
-" Set 85 length
-nnoremap <silent> <leader>w :vertical resize 85<CR>
