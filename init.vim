@@ -134,7 +134,6 @@ nnoremap <silent> <leader>w :vertical resize 85<CR>
 nnoremap <silent> <C-Right> :bnext<CR>
 nnoremap <silent> <C-Left> :bprevious<CR>
 nnoremap <silent> <C-q> :bd<CR>
-nnoremap <silent> <C-a> :KillOtherBuffers<CR>
 
 " Swap windowis with Ctrl + direction
 nnoremap <C-l> <C-W>l
