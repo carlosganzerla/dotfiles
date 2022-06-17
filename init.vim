@@ -124,6 +124,7 @@ endfunction
 
 command! -nargs=0 KillOtherBuffers call KillOtherBuffers()
 
+noremap <silent> <C-o> :KillOtherBuffers<CR>
 " Kills buffer without messing windows
 noremap <silent> <leader>c :bp\|bd #<CR>
 
@@ -259,7 +260,7 @@ omap af <Plug>(coc-funcobj-a)
 command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
