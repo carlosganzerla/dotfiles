@@ -158,6 +158,11 @@ xnoremap <Leader>ps "sy:Rg <C-r>s<CR>
  " Load .vimrc onto another buffer
 nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
 
+" Run black
+command! Black
+          \ execute 'silent !black %:p --line-length 79'
+          \ | redraw!
+
 " Run ESLINT
 command! Eslint
             \ execute 'silent !eslint %:p --quiet --fix'
