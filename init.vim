@@ -372,3 +372,6 @@ let g:slimv_swank_scheme = '! kitty --single-instance mit-scheme --load ~/.confi
 
 " Set lisp automatically for .asd files
 autocmd BufNewFile,BufRead *.asd :set filetype=lisp
+
+nnoremap <silent> <leader><Right> :tabnext<CR>
+nnoremap <silent> <leader><Left> :tabprev<CR>
