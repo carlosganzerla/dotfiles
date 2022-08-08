@@ -124,7 +124,7 @@ endfunction
 
 command! -nargs=0 KillOtherBuffers call KillOtherBuffers()
 
-noremap <silent> <leader>o :KillOtherBuffers<CR>
+noremap <silent> <leader>q :KillOtherBuffers<CR>
 " Kills buffer without messing windows
 noremap <silent> <leader>c :bp\|bd #<CR>
 
