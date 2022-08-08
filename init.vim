@@ -17,7 +17,7 @@ set shiftround             " >> indents to next multiple of 'shiftwidth'.
 set sm
 
 " set spell spelllang=en_us   " Spell checker
-set nospell
+set nospell " using spelunker
 
 " Show line numbers
 " set number
@@ -124,7 +124,7 @@ endfunction
 
 command! -nargs=0 KillOtherBuffers call KillOtherBuffers()
 
-noremap <silent> <C-o> :KillOtherBuffers<CR>
+noremap <silent> <leader>o :KillOtherBuffers<CR>
 " Kills buffer without messing windows
 noremap <silent> <leader>c :bp\|bd #<CR>
 
