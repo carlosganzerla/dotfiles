@@ -87,6 +87,7 @@ Plug 'tribela/vim-transparent'
 Plug 'kovisoft/slimv'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jremmen/vim-ripgrep'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 " Disable mouse
