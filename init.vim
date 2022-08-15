@@ -1,4 +1,4 @@
-" A (not so) minimal vimrc.
+﻿" A (not so) minimal vimrc.
 "
  "You want Vim, not vi. When Vim finds a vimrc, 'nocompatible' is set anyway.
 " We set it explicitly to make our position clear!
@@ -87,6 +87,7 @@ Plug 'tribela/vim-transparent'
 Plug 'kovisoft/slimv'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jremmen/vim-ripgrep'
+Plug 'carlosganzerla/utf8-math'
 call plug#end()
 
 " Disable mouse
