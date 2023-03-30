@@ -116,6 +116,7 @@ xnoremap <Leader>fr "sy:%s/<C-r>s/<C-r>s/g<Left><Left>
 
 " Nerd tree bindings
 nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+command! Find execute ':NERDTreeFind %p'
 
 " Kills all buffers then reopens the current one
 function! KillOtherBuffers()
