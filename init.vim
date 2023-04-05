@@ -308,12 +308,6 @@ nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <leader>p  :<C-u>CocListResume<CR>
-
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
-nmap <silent> <S-TAB> <Plug>(coc-range-select-backward)
-xmap <silent> <S-TAB> <Plug>(coc-range-select-backward)
-
 " List only non ignored files in CTRL P fuzzy find
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
