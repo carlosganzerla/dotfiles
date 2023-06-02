@@ -161,7 +161,7 @@ nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
 
 " Run black
 command! Black
-          \ execute 'silent !black %:p --line-length 79'
+          \ execute 'silent !poetry run black %:p --line-length 79'
           \ | redraw!
 
 " Run ESLINT
