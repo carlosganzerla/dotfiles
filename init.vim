@@ -87,6 +87,7 @@ Plug 'tribela/vim-transparent'
 Plug 'kovisoft/slimv'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jremmen/vim-ripgrep'
+Plug 'rhysd/vim-grammarous'
 call plug#end()
 
 " Disable mouse
@@ -175,7 +176,7 @@ command! TrimTrailing execute ':%s/\s\+$//e'
 " Save file
 nnoremap <C-s> :w<CR>
 
-" Redraw on Ctrl F5
+  " Redraw on Ctrl F5
 nnoremap <C-F5> :redraw!<CR>
 " coc config
 let g:coc_global_extensions = [
@@ -392,3 +393,15 @@ autocmd BufNewFile,BufRead *.asd :set filetype=lisp
 
 nnoremap <silent> <leader><Right> :tabnext<CR>
 nnoremap <silent> <leader><Left> :tabprev<CR>
+
+" Grammarous fix for nvim 0.8+
+let g:grammarous#jar_url = 'https://www.languagetool.org/download/LanguageTool-5.9.zip'
+
+" Spellunker configs
+" Disable URI checking. 
+let g:spelunker_disable_uri_checking = 1
+let g:spelunker_disable_email_checking = 1
+" Disable account name checking, e.g. @foobar, foobar@. (default: 0)
+let g:spelunker_disable_account_name_checking = 1
+let g:spelunker_disable_acronym_checking = 1
+let g:spelunker_disable_backquoted_checking = 1
