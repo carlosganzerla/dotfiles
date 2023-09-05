@@ -76,7 +76,7 @@ noremap <F6> :source ~/.config/nvim/init.vim<CR>
 
 call plug#begin('~/.config/autoload/plugged')
 Plug 'morhetz/gruvbox'
-Plug 'preservim/nerdtree'
+Plug 'lambdalisue/fern.vim'
 Plug 'kamykn/spelunker.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
@@ -116,8 +116,8 @@ nnoremap <Leader>fr :%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left>
 xnoremap <Leader>fr "sy:%s/<C-r>s/<C-r>s/g<Left><Left>
 
 " Nerd tree bindings
-nnoremap <silent> <C-b> :NERDTreeToggle<CR>
-command! Find execute ':NERDTreeFind %p'
+nnoremap <silent> <C-b> :Fern . -drawer -toggle<CR>
+command! Find execute ':Fern . -drawer -reveal=%'
 
 " Kills all buffers then reopens the current one
 function! KillOtherBuffers()
@@ -405,3 +405,15 @@ let g:spelunker_disable_email_checking = 1
 let g:spelunker_disable_account_name_checking = 1
 let g:spelunker_disable_acronym_checking = 1
 let g:spelunker_disable_backquoted_checking = 1
+
+
+" Fern initialization
+function! s:init_fern() abort
+  nmap <buffer> <C-l> <C-W>l
+  nmap <buffer> <C-h> <C-W>h
+endfunction
+
+augroup my-fern
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+augroup END
