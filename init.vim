@@ -411,6 +411,7 @@ let g:spelunker_disable_backquoted_checking = 1
 function! s:init_fern() abort
   nmap <buffer> <C-l> <C-W>l
   nmap <buffer> <C-h> <C-W>h
+  nmap <buffer> D <Plug>(fern-action-remove)
 endfunction
 
 augroup my-fern
