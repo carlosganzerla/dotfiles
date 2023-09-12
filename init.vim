@@ -75,27 +75,63 @@ noremap <F5> :buffers<CR>:buffer<Space>
 noremap <F6> :source ~/.config/nvim/init.vim<CR>
 
 call plug#begin('~/.config/autoload/plugged')
-Plug 'morhetz/gruvbox'
+Plug 'Mofiqul/vscode.nvim'
 Plug 'lambdalisue/fern.vim'
 Plug 'kamykn/spelunker.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-abolish'
 Plug 'tribela/vim-transparent'
 Plug 'kovisoft/slimv'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'jremmen/vim-ripgrep'
-Plug 'rhysd/vim-grammarous'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 call plug#end()
 
 " Disable mouse
 set mouse=
-" VS Code like colors
 set t_Co=256
 set t_ut=
-colorscheme gruvbox
+
+" Theme and status line
+
+lua << END
+local c = require('vscode.colors').get_colors()
+require('vscode').setup({
+    -- Alternatively set style in setup
+    -- style = 'light'
+
+    -- Enable transparent background
+    transparent = true,
+
+    -- Enable italic comment
+    italic_comments = true,
+
+    -- Disable nvim-tree background color
+    disable_nvimtree_bg = true,
+
+    -- Override colors (see ./lua/vscode/colors.lua)
+    color_overrides = {
+        vscLineNumber = '#FFFFFF',
+    },
+
+    -- Override highlight groups (see ./lua/vscode/theme.lua)
+    group_overrides = {
+        -- this supports the same val table as vim.api.nvim_set_hl
+        -- use colors from this colorscheme by requiring vscode.colors!
+        Cursor = { fg=c.vscDarkBlue, bg=c.vscLightGreen, bold=true },
+    }
+})
+require('vscode').load()
+require('lualine').setup({
+    options = {
+        theme = 'vscode',
+    },
+})
+END
+
+" colorscheme deus
 
 " Show Tree
 let g:netrw_banner = 0
@@ -127,6 +163,7 @@ endfunction
 command! -nargs=0 KillOtherBuffers call KillOtherBuffers()
 
 noremap <silent> <leader>qa :KillOtherBuffers<CR>
+
 " Kills buffer without messing windows
 noremap <silent> <leader>c :bp\|bd #<CR>
 
