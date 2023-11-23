@@ -1,0 +1,4 @@
+*.diff
+*.orig
+*.o
+dwm
