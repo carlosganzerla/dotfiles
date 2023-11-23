@@ -1,19 +1,20 @@
-dotifle config using `stow`
+# Dot files
 
-# Program - What for
-xrandr - manages displays
-dunst - desktop notifications
-lf - file manager
-notify-send - test system notifications
-dfm - dot file versioner
+This repo contains my dotfiles, and some other customizable programs like DWM
+and DWMBlocks. It also contain my Arch packages.
 
-# Dot files to version later
-.xinitrc
-.bashrc
-.bash_profile
-.bash_aliases
-dunstrc
+## Useful programs
 
-# Custom stuff 
+Some stuff so I can remind myself.
 
-DWM
+- `xrandr`: manages displays
+- `dunst`: desktop notifications
+- `lf`: file manager
+- `notify-send`: test systems notifications
+- `stow`: creates symlinks for dotfiles
+
+## Install
+
+To install the dotfiles, run `stow */` on the proejct root.
+To install dwm/dwmblocks, just go on `programs/{dwm, dwmblocks}` and run `sudo
+make install`.
