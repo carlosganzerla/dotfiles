@@ -3,6 +3,7 @@ aws-cli
 base
 base-devel
 bash-completion
+code
 conky
 dhcpcd
 discord
@@ -15,7 +16,6 @@ feh
 geoip
 git
 gnu-free-fonts
-google-chrome
 grub
 iw
 iwd
@@ -26,7 +26,6 @@ libxft
 libxinerama
 linux
 linux-firmware
-liquibase
 meld
 neovim
 netctl
@@ -37,7 +36,6 @@ pavucontrol
 pipewire
 pipewire-pulse
 postgresql-libs
-postman-bin
 pyenv
 python-matplotlib
 python-pip
