@@ -5,16 +5,24 @@ and DWMBlocks. It also contain my Arch packages.
 
 ## Useful programs
 
-Some stuff so I can remind myself.
+Some useful programs that are installed in my Arch:
 
-- `xrandr`: manages displays
-- `dunst`: desktop notifications
-- `lf`: file manager
-- `notify-send`: test systems notifications
-- `stow`: creates symlinks for dotfiles
+- `xrandr`: manages displays.
+- `dunst`: desktop notifications.
+- `lf`: file manager.
+- `notify-send`: test systems notifications.
+- `stow`: creates symlinks for dotfiles.
+- `startx`: Starts X server
 
 ## Install
 
-To install the dotfiles, run `stow */` on the proejct root.
-To install dwm/dwmblocks, just go on `programs/{dwm, dwmblocks}` and run `sudo
-make install`.
+Run `sudo make all` to install everything.
+
+Run `make dotfiles` to update dotfiles
+
+Run `sudo make dwm` to update DWM/DWMBLOCKS
+
+Run `make pkglist` to update the installed programs.
+
+I could not automate the installation of AUR packages, but they can be found on
+`programs/.pacmanlistaur`.
