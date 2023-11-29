@@ -195,16 +195,6 @@ xnoremap <Leader>ps "sy:Rg <C-r>s<CR>
  " Load .vimrc onto another buffer
 nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
 
-" Run black
-command! Black
-          \ execute 'silent !poetry run black %:p --line-length 79'
-          \ | redraw!
-
-" Run ESLINT
-command! Eslint
-            \ execute 'silent !eslint %:p --quiet --fix'
-            \ | redraw!
-
 " Clear trailing whitespace
 command! TrimTrailing execute ':%s/\s\+$//e'
 
@@ -224,6 +214,7 @@ let g:coc_global_extensions = [
   \ 'coc-fsharp',
   \ 'coc-css',
   \ 'coc-markdownlint',
+  \ 'coc-clangd',
   \ ]
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -314,7 +305,13 @@ omap ac <Plug>(coc-classobj-a)
 
 
 " Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
+let formatExceptions = ['python']
+augroup formatting
+  autocmd!
+  autocmd FileType python command! Format  execute 'silent !poetry run black %:p --line-length 79' | redraw!
+  autocmd FileType * if index(formatExceptions, &ft) < 0 | command! -nargs=0 Format :call CocAction('format')
+augroup end
+
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
