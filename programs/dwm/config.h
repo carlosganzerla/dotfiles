@@ -58,6 +58,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "kitty", NULL };
 /* custom commands */
 static const char *screenshot[]  = { "scrot", "/home/carlo/screenshots/%Y-%m-%d-%T_scrot.png", NULL };
+static const char *screenshot_snip[]  = { "scrot", "-s", "/home/carlo/screenshots/%Y-%m-%d-%T_scrot.png", NULL };
 static const char *webcmd[]  = { "google-chrome-stable", NULL };
 
 #include "shift-tools.c"
@@ -104,6 +105,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	/* custom commands */
 	{0,                             XK_Print,  spawn,          {.v = screenshot } },
+	{ShiftMask,                     XK_Print,  spawn,          {.v = screenshot_snip } },
 };
 
 /* button definitions */
