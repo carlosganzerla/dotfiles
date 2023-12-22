@@ -3,6 +3,7 @@ aws-cli
 base
 base-devel
 bash-completion
+bear
 code
 conky
 dhcpcd
@@ -35,6 +36,7 @@ os-prober
 pavucontrol
 pipewire
 pipewire-pulse
+postgresql
 postgresql-libs
 pyenv
 python-matplotlib
@@ -42,6 +44,9 @@ python-pip
 python-poetry
 python-scipy
 ripgrep
+ruby
+ruby-rdoc
+sbcl
 scrot
 stow
 sudo
