@@ -87,6 +87,7 @@ Plug 'kovisoft/slimv'
 Plug 'jremmen/vim-ripgrep'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'ledger/vim-ledger'
 call plug#end()
 
 " Disable mouse
