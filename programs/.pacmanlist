@@ -22,6 +22,7 @@ iw
 iwd
 jupyterlab
 kitty
+ledger
 lf
 libxft
 libxinerama
@@ -31,6 +32,7 @@ meld
 neovim
 netctl
 nodejs-lts-hydrogen
+noto-fonts-emoji
 npm
 os-prober
 pavucontrol
@@ -50,6 +52,7 @@ sbcl
 scrot
 stow
 sudo
+syncthing
 tk
 ttf-dejavu
 ttf-font-awesome
