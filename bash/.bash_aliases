@@ -5,18 +5,23 @@ pyexec () {
 }
 
 l () {
-    ledger -f $JOURNAL_PATH --check-payees --pedantic "$@"
+    ledger -f $JOURNAL_PATH/journal.ledger --check-payees --pedantic "$@"
+}
+
+f () {
+    python3 $JOURNAL_PATH/scripts/main.py &&
+    ledger -f $JOURNAL_PATH/forecast.ledger --check-payees --pedantic "$@"
 }
 
 xact () {
     local xact_fmt="$(l xact "$@" | sed -E s/"([0-9]{4})\/([0-9]{2})\/([0-9]{2}) "/"\1-\2-\3 * "/g)";
     echo "$xact_fmt";
     if [ $? -eq 0 ]; then
-        read -p "Write to ledger?" yn
+        read -p "Write to ledger? [y/n] " yn
         case $yn in 
             [yY] )
-                echo "" >> $JOURNAL_PATH;
-                echo "$xact_fmt" >> $JOURNAL_PATH;
+                echo "" >> $JOURNAL_PATH/journal.ledger;
+                echo "$xact_fmt" >> $JOURNAL_PATH/journal.ledger;
                 echo "Written successfully!";;
             [nN] ) ;;
             * ) echo Invalid response;;
