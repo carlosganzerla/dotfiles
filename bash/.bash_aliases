@@ -14,7 +14,7 @@ f () {
 }
 
 xact () {
-    local xact_fmt="$(l xact "$@" | sed -E s/"([0-9]{4})\/([0-9]{2})\/([0-9]{2}) "/"\1-\2-\3 * "/g)";
+    local xact_fmt="$(l xact "$@" | sed -E s/"([0-9]{4})-([0-9]{2})-([0-9]{2}) "/"\1-\2-\3 * "/g)";
     echo "$xact_fmt";
     if [ $? -eq 0 ]; then
         read -p "Write to ledger? [y/n] " yn
