@@ -8,9 +8,8 @@ l () {
     ledger -f $JOURNAL_PATH/journal.ledger "$@"
 }
 
-f () {
-    python3 $JOURNAL_PATH/scripts/main.py &&
-    ledger -f $JOURNAL_PATH/forecast.ledger "$@"
+lscript () {
+    bash $JOURNAL_PATH/scripts/main "$@"
 }
 
 xact () {
