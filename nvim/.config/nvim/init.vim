@@ -306,10 +306,9 @@ omap ac <Plug>(coc-classobj-a)
 
 
 " Use `:Format` to format current buffer
-let formatExceptions = ['python']
+let formatExceptions = []
 augroup formatting
   autocmd!
-  autocmd FileType python command! Format  execute 'silent !poetry run black %:p --line-length 79' | redraw!
   autocmd FileType * if index(formatExceptions, &ft) < 0 | command! -nargs=0 Format :call CocAction('format')
 augroup end
 
