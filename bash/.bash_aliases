@@ -38,4 +38,5 @@ setup-artifact() {
 alias pyblack='poetry run black . --line-length 79'
 alias vimdiff='nvim -d'
 alias display-monitor-only='xrandr --output HDMI-1 --auto && xrandr --output eDP-1 --off'
-alias display-both='xrandr --output eDP-1 --right-of HDMI-1'
+alias display-both='xrandr --output eDP-1 --auto && xrandr --output HDMI-1 --left-of eDP-1'
+alias rmorigs='find . -name '*.orig' -delete'

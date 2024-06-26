@@ -7,7 +7,8 @@ setxkbmap br
 xcompmgr -c &
 
 # Montior positioning
-xrandr --output HDMI-1 --left-of eDP-1 
+xrandr --output HDMI-1 --primary
+xrandr --output HDMI-1 --left-of eDP-1
 
 # Set wallpaper
 ~/.fehbg &
