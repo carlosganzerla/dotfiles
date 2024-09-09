@@ -88,6 +88,7 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'ledger/vim-ledger'
+Plug 'rhysd/git-messenger.vim'
 call plug#end()
 
 " Disable mouse
