@@ -32,11 +32,13 @@ libxinerama
 linux
 linux-firmware
 meld
+mesa-utils
 neovim
 netctl
 nodejs-lts-hydrogen
 noto-fonts-emoji
 npm
+ollama
 os-prober
 pavucontrol
 pipewire
