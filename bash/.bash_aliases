@@ -35,6 +35,10 @@ setup-artifact() {
     poetry config http-basic.codeartifact-write aws $CODEARTIFACT_TOKEN
 }
 
+ollama-unload() {
+    curl http://localhost:11434/api/generate -d '{"model": "'$1'", "keep_alive": 0}'
+}
+
 alias pyblack='poetry run black . --line-length 79'
 alias vimdiff='nvim -d'
 alias display-monitor-only='xrandr --output HDMI-1 --auto && xrandr --output eDP-1 --off'

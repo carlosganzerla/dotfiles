@@ -89,6 +89,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'ledger/vim-ledger'
 Plug 'rhysd/git-messenger.vim'
+Plug 'David-Kunz/gen.nvim'
 call plug#end()
 
 " Disable mouse
@@ -451,3 +452,24 @@ augroup my-fern
   autocmd! *
   autocmd FileType fern call s:init_fern()
 augroup END
+
+" Gen AI config
+lua << END
+require('gen').setup({
+  model = "mistral:instruct",
+  -- same as above
+  display_mode = "split"
+})
+
+require('gen').prompts['Add_Type_Annotations'] = {
+  prompt = "Add type annotations to the following code without changing the underlying implementation. Only output the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+  replace = false,
+  extract = "```$filetype\n(.-)```"
+}
+
+require('gen').prompts['Generate_code'] = {
+prompt = "Generate the code as instructed and nothing else. Only output the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```. $input",
+  replace = false,
+  extract = "```$filetype\n(.-)```"
+}
+END
