@@ -63,7 +63,4 @@ if vim.fn.has('multi_byte') and vim.opt.encoding == 'utf-8' then
 else
     vim.opt.listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
 end
-
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 vim.o.mouse = ''

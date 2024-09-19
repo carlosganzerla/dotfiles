@@ -1,4 +1,5 @@
-F = require('functions')
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Show buffers on F5
 vim.keymap.set("n", "<F5>", ":buffers<CR>:buffer<Space>")
