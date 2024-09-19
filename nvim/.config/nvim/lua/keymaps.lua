@@ -1,3 +1,5 @@
+F = require('functions')
+
 -- Show buffers on F5
 vim.keymap.set("n", "<F5>", ":buffers<CR>:buffer<Space>")
 
@@ -48,7 +50,7 @@ vim.keymap.set("n", "<C-w><C-q>", "<nop>")
 
 -- Apply macros on visual mode. Source:
 -- https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
-vim.keymap.set("x", "@", ":<C-u> call ExecuteMacroOverVisualRange()<CR>", { noremap = true, silent = true })
+vim.keymap.set("x", "@", ":<C-u>lua ExecuteMacroOverVisualRange()<CR>", { noremap = true, silent = true })
 
 -- Disable arrows
 vim.keymap.set("n", "<Up>", "<nop>")
