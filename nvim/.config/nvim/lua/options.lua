@@ -2,8 +2,6 @@ vim.opt.compatible = false
 
 -- Change highlighting of cursor line when entering/leaving Insert Mode
 vim.filetype.plugin_indent_on = true
-vim.opt.syntax = "on"
-vim.opt.omnifunc = "syntaxcomplete#Complete"
 
 -- Indentation settings
 vim.opt.autoindent = true
