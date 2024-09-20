@@ -110,10 +110,7 @@ require("lazy").setup({
     { "nvim-tree/nvim-tree.lua", lazy = false },
     { "David-Kunz/gen.nvim" },
     {
-        "jay-babu/mason-null-ls.nvim",
-        dependencies = {
-            "williamboman/mason.nvim",
-            "nvimtools/none-ls.nvim",
-        },
+        'stevearc/conform.nvim',
+        opts = {},
     }
 })

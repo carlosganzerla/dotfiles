@@ -1,9 +1,32 @@
----@diagnostic disable: unused-local
 -- Diagnostic keymaps
 vim.keymap.set('n', '[g', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+-- LSP formatters
+local conform = require("conform")
+conform.setup({
+    formatters_by_ft = {
+        python = { "black" },
+        css = { "prettier" },
+        flow = { "prettier" },
+        graphql = { "prettier" },
+        html = { "prettier" },
+        json = { "prettier" },
+        javascriptreact = { "prettier" },
+        javascript = { "prettier" },
+        less = { "prettier" },
+        markdown = { "prettier" },
+        scss = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        yaml = { "prettier" }
+    },
+    default_format_opts = {
+        lsp_format = "fallback",
+    },
+})
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -54,11 +77,7 @@ local on_attach = function(_, bufnr)
 
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        if vim.lsp.buf.format then
-            vim.lsp.buf.format()
-        elseif vim.lsp.buf.formatting then
-            vim.lsp.buf.formatting()
-        end
+        conform.format({ bufnr = bufnr })
     end, { desc = 'Format current buffer with LSP' })
 end
 
@@ -127,18 +146,4 @@ vim.api.nvim_create_autocmd('FileType', {
             cmd = { 'bash-language-server', 'start' },
         })
     end,
-})
-
-
--- Formatting
-require('mason-null-ls').setup({
-    ensure_installed = { 'black', 'prettier' }
-})
-
-local null_ls = require("null-ls")
-
-null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.black,
-    },
 })
