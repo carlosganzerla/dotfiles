@@ -2,3 +2,4 @@ nvim/.config/nvim/spell
 *.diff
 *.orig
 *.o
+dwmblocks
