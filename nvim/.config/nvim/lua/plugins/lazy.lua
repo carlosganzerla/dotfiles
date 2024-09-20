@@ -97,5 +97,15 @@ require("lazy").setup({
         -- or                              , branch = '0.1.x',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
+    { -- Highlight, edit, and navigate code
+        'nvim-treesitter/nvim-treesitter',
+        build = function()
+            pcall(require('nvim-treesitter.install').update { with_sync = true })
+        end,
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter-textobjects',
+        }
+    },
     { "catppuccin/nvim", as = "catppuccin", priority = 10000 },
+    { "nvim-tree/nvim-tree.lua", lazy = false }
 })

@@ -61,4 +61,7 @@ vim.keymap.set("n", "<Right>", "<nop>")
 
 -- Tab navigation
 vim.keymap.set("n", "<leader><Right>", ":tabnext<CR>", { silent = true })
--- vim.keymap.set("n", "<leader><Left>", ":tabprev<CR>", { silent = true })
+vim.keymap.set("n", "<leader><Left>", ":tabprev<CR>", { silent = true })
+
+-- Toggle tree
+vim.keymap.set('n', '<C-b>', ':NvimTreeToggle<CR>', { silent = true, noremap = true, nowait = true })

@@ -1,3 +1,7 @@
+-- Disable netrw for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.compatible = false
 
 -- Change highlighting of cursor line when entering/leaving Insert Mode
