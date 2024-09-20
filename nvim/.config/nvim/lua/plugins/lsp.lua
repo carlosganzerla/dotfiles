@@ -32,8 +32,8 @@ local on_attach = function(_, bufnr)
 
     local builtin = require('telescope.builtin')
     nmap('<F2>', vim.lsp.buf.rename, 'Rename')
-    nmap('<leader>ca', vim.lsp.buf.code_action, 'Code action')
-    xmap('<leader>ca', vim.lsp.buf.code_action, 'Code action')
+    nmap('<leader>ac', vim.lsp.buf.code_action, 'Code action')
+    xmap('<leader>ac', vim.lsp.buf.code_action, 'Code action')
     nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
     nmap('gr', builtin.lsp_references, 'Goto References')
     nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
@@ -67,7 +67,7 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'biome', 'lua_ls', 'pyright', }
+local servers = { 'ts_ls', 'lua_ls', 'pyright' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
@@ -127,4 +127,18 @@ vim.api.nvim_create_autocmd('FileType', {
             cmd = { 'bash-language-server', 'start' },
         })
     end,
+})
+
+
+-- Formatting
+require('mason-null-ls').setup({
+    ensure_installed = { 'black', 'prettier' }
+})
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.black,
+    },
 })

@@ -106,7 +106,14 @@ require("lazy").setup({
             'nvim-treesitter/nvim-treesitter-textobjects',
         }
     },
-    { "catppuccin/nvim", as = "catppuccin", priority = 10000 },
+    { "catppuccin/nvim",         as = "catppuccin", priority = 10000 },
     { "nvim-tree/nvim-tree.lua", lazy = false },
     { "David-Kunz/gen.nvim" },
+    {
+        "jay-babu/mason-null-ls.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "nvimtools/none-ls.nvim",
+        },
+    }
 })
