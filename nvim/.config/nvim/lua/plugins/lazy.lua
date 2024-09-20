@@ -107,5 +107,6 @@ require("lazy").setup({
         }
     },
     { "catppuccin/nvim", as = "catppuccin", priority = 10000 },
-    { "nvim-tree/nvim-tree.lua", lazy = false }
+    { "nvim-tree/nvim-tree.lua", lazy = false },
+    { "David-Kunz/gen.nvim" },
 })

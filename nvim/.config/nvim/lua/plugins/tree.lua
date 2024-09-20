@@ -8,6 +8,7 @@ local function my_on_attach(bufnr)
     -- default mappings
     api.config.mappings.default_on_attach(bufnr)
 
+    vim.keymap.set('n', 'n', api.fs.create, opts('Create'))
 end
 
 -- pass to setup along with your other options
