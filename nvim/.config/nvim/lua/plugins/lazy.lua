@@ -96,5 +96,6 @@ require("lazy").setup({
         tag = '0.1.8',
         -- or                              , branch = '0.1.x',
         dependencies = { 'nvim-lua/plenary.nvim' }
-    }
+    },
+    { "catppuccin/nvim", as = "catppuccin", priority = 10000 },
 })

@@ -62,3 +62,6 @@ else
     vim.opt.listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
 end
 vim.o.mouse = ''
+
+-- Theme
+vim.cmd.colorscheme("catppuccin-mocha")
