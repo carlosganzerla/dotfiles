@@ -30,8 +30,7 @@ local on_attach = function(_, bufnr)
         vim.keymap.set('x', keys, func, { buffer = bufnr, desc = desc })
     end
 
-    -- TODO Try out telescope
-    -- TODO add code action for selection
+    local builtin = require('telescope.builtin')
     nmap('<F2>', vim.lsp.buf.rename, 'Rename')
     nmap('<leader>ca', vim.lsp.buf.code_action, 'Code action')
     xmap('<leader>ca', vim.lsp.buf.code_action, 'Code action')
@@ -39,8 +38,8 @@ local on_attach = function(_, bufnr)
     nmap('gr', vim.lsp.buf.references, 'Goto References')
     nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
     nmap('gy', vim.lsp.buf.type_definition, 'Type Definition')
-    -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-    -- nmap('<leader>s', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+    nmap('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
+    nmap('<leader>s', builtin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
     nmap('gh', vim.lsp.buf.hover, 'Hover Documentation')
     nmap('gs', vim.lsp.buf.signature_help, 'Signature Documentation')
