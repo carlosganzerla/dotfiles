@@ -16,6 +16,7 @@ efibootmgr
 feh
 geoip
 git
+glow
 gnu-free-fonts
 gnuplot
 grub
@@ -38,6 +39,8 @@ netctl
 nodejs-lts-hydrogen
 noto-fonts-emoji
 npm
+nvtop
+obsidian
 ollama
 os-prober
 pavucontrol
@@ -57,6 +60,7 @@ sbcl
 scrot
 stow
 sudo
+syncthing
 tk
 ttf-dejavu
 ttf-font-awesome

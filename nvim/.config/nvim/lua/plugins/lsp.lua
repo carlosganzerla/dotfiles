@@ -9,6 +9,7 @@ local conform = require("conform")
 conform.setup({
     formatters_by_ft = {
         c = { "clang-format" },
+        bash = { 'beautysh' },
         python = { "black" },
         css = { "prettier" },
         flow = { "prettier" },
@@ -87,7 +88,7 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'ts_ls', 'lua_ls', 'pyright', 'clangd' }
+local servers = { 'ts_ls', 'lua_ls', 'pyright', 'clangd', 'bashls' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
@@ -138,13 +139,3 @@ require('lspconfig').lua_ls.setup {
         },
     },
 }
-
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'sh',
-    callback = function()
-        vim.lsp.start({
-            name = 'bash-language-server',
-            cmd = { 'bash-language-server', 'start' },
-        })
-    end,
-})
