@@ -53,8 +53,8 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Path and file settings
-vim.opt.path = vim.opt.path:append "/**"
-vim.opt.wildignore = vim.opt.wildignore:append "**/node_modules/**,**/__pycache__/**"
+vim.opt.path:append "**"
+vim.opt.wildignore:append "**/node_modules/**,**/__pycache__/**"
 vim.opt.wrapscan = true
 vim.opt.report = 0
 vim.opt.synmaxcol = 200
