@@ -8,7 +8,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 local conform = require("conform")
 conform.setup({
     formatters_by_ft = {
-        c = { "clang-format" },
         bash = { 'beautysh' },
         python = { "black" },
         css = { "prettier" },
@@ -79,7 +78,10 @@ local on_attach = function(_, bufnr)
 
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        conform.format({ bufnr = bufnr })
+        local attempted = conform.format({ bufnr = bufnr })
+        if (not attempted) then
+            vim.lsp.buf.format({ bufnr = bufnr })
+        end
     end, { desc = 'Format current buffer with LSP' })
 end
 
