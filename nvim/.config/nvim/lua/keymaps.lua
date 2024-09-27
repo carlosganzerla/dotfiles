@@ -5,7 +5,7 @@ vim.g.maplocalleader = ' '
 vim.keymap.set("n", "<F5>", ":buffers<CR>:buffer<Space>")
 
 -- Reload .vimrc with F6
-vim.keymap.set("n", "<F6>", ":source ~/.config/nvim/init.lua<CR>")
+vim.keymap.set("n", "<F6>", ":luafile ~/.config/nvim/init.lua<CR>")
 
 -- When in normal mode, stop highlighting search results
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true })

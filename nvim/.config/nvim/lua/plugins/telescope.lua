@@ -13,7 +13,7 @@ require('telescope').setup {
                 },
             },
         },
-        file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+        file_previewer = require 'telescope.previewers'.vim_buffer_cat.new,
         pickers = {
             find_files = {
                 theme = "dropdown",
