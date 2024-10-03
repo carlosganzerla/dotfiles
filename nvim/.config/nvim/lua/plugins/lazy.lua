@@ -47,7 +47,6 @@ require("lazy").setup({
             -- nvim-cmp setup
             local cmp = require 'cmp'
             local luasnip = require 'luasnip'
-
             cmp.setup({
                 view = {
                     entries = "native"
@@ -65,28 +64,28 @@ require("lazy").setup({
                         behavior = cmp.ConfirmBehavior.Replace,
                         select = true,
                     },
-                    ['<C-k>'] = cmp.mapping(function (fallback)
+                    ['<C-k>'] = cmp.mapping(function(fallback)
                         if luasnip.expand_or_jumpable() then
                             luasnip.expand_or_jump()
                         else
                             fallback()
                         end
                     end, { 'i', 's' }),
-                    ['<C-j>'] = cmp.mapping(function (fallback)
+                    ['<C-j>'] = cmp.mapping(function(fallback)
                         if luasnip.jumpable(-1) then
                             luasnip.jump(-1)
                         else
                             fallback()
                         end
                     end, { 'i', 's' }),
-                    ['<C-l>'] = cmp.mapping(function (fallback)
+                    ['<C-l>'] = cmp.mapping(function(fallback)
                         if luasnip.choice_active() then
                             luasnip.change_choice(1)
                         else
                             fallback()
                         end
                     end, { 'i', 's' }),
-                    ['<C-h>'] = cmp.mapping(function (fallback)
+                    ['<C-h>'] = cmp.mapping(function(fallback)
                         if luasnip.choice_active() then
                             luasnip.change_choice(-1)
                         else
@@ -146,5 +145,5 @@ require("lazy").setup({
     {
         'stevearc/conform.nvim',
         opts = {},
-    }
+    },
 })

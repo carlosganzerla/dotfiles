@@ -109,7 +109,7 @@ ls.add_snippets("typescript", {
         }))
 });
 
-ls.add_snippets("all", {
+ls.add_snippets("typescriptreact", {
     s("story", fmt(
         [[
             import React from 'react';
