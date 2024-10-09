@@ -7,6 +7,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 -- LSP formatters
 local conform = require("conform")
 conform.setup({
+    -- Can be used with Mason installed formatters
     formatters_by_ft = {
         bash = { 'beautysh' },
         python = { "black" },
@@ -90,7 +91,7 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'ts_ls', 'lua_ls', 'pyright', 'clangd', 'bashls' }
+local servers = { 'ts_ls', 'lua_ls', 'pyright', 'clangd', 'bashls', 'jsonls' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {

@@ -165,5 +165,37 @@ ls.add_snippets("typescriptreact", {
 
 })
 
+ls.add_snippets("python", {
+    s("python test", fmt(
+        [[
+            import pytest
+            {}
+            {}
+            {}
+            {}
+            def test_{}():
+                pass
+        ]],
+        {
+            c(1, { t({ "from unittest.mock import Mock, AsyncMock", "" }), t("") }),
+            c(2, { fmt([[
+            class Dependencies:
+                def __init__(self) -> None:
+                    pass
+            ]], {}), t("") }),
+            c(3, {
+                fmt([[
+                    @pytest.fixture
+                    def fixture():
+                ]], {}), t("") }),
+            c(4, { fmt([[
+                @pytest.fixture
+                def dependencies():
+                    return Dependencies()
+                ]], {}), t("") }),
+            i(5),
+        }
+    )),
+})
 
 vim.keymap.set("n", "<leader><leader>s", "<cmd>luafile ~/.config/nvim/lua/plugins/snippets.lua<CR>")

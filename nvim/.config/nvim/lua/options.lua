@@ -69,3 +69,4 @@ vim.o.mouse = ''
 
 -- Theme
 vim.cmd.colorscheme("catppuccin-mocha")
+vim.cmd([[set spell]])
