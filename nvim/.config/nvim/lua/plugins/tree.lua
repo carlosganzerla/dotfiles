@@ -9,7 +9,6 @@ local function my_on_attach(bufnr)
     api.config.mappings.default_on_attach(bufnr)
 
     vim.keymap.set('n', 'n', api.fs.create, opts('Create'))
-    vim.keymap.set('n', 'u', api.fs.rename, opts('Rename'))
 end
 
 -- pass to setup along with your other options
