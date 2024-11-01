@@ -22,13 +22,15 @@ require("lazy").setup({
     "jremmen/vim-ripgrep",
     "nvim-lualine/lualine.nvim",
     "nvim-tree/nvim-web-devicons",
+    "nvimtools/none-ls.nvim",
     { -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
-
+            'jay-babu/mason-null-ls.nvim',
+            'WhoIsSethDaniel/mason-tool-installer.nvim',
             -- Useful status updates for LSP
             'j-hui/fidget.nvim',
         }
