@@ -70,20 +70,21 @@ require("mason-lspconfig").setup({
 })
 
 require("mason-tool-installer").setup({
-    ensure_installed = { "isort", "black", "prettierd", "stylua", "codespell", "markdownlint"}
+    ensure_installed = { "isort", "black", "prettierd", "stylua", "codespell", "markdownlint" },
 })
 
 local null_ls = require("null-ls")
 
 function table.copy(t)
-  local u = { }
-  for k, v in pairs(t) do u[k] = v end
-  return setmetatable(u, getmetatable(t))
+    local u = {}
+    for k, v in pairs(t) do
+        u[k] = v
+    end
+    return setmetatable(u, getmetatable(t))
 end
 
-
 -- Remove range formatting from black cuz it won't allow gqq's on comments
-local black  = table.copy(null_ls.builtins.formatting.black)
+local black = table.copy(null_ls.builtins.formatting.black)
 local methods = require("null-ls.methods")
 local FORMATTING = methods.internal.FORMATTING
 black.method = { FORMATTING }
@@ -95,10 +96,9 @@ null_ls.setup({
         null_ls.builtins.formatting.isort,
         black,
         null_ls.builtins.diagnostics.codespell,
-        null_ls.builtins.diagnostics.markdownlint
+        null_ls.builtins.diagnostics.markdownlint,
     },
 })
-
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
