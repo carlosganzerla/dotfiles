@@ -111,8 +111,8 @@ for _, lsp in ipairs(servers) do
     })
 end
 
--- Turn on lsp status information
-require("fidget").setup({})
+-- Turn on lsp status information. This is for debug only.
+-- require("fidget").setup({})
 
 -- Example custom configuration for lua
 --
