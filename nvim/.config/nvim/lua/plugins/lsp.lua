@@ -62,7 +62,7 @@ require("mason").setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { "ts_ls", "lua_ls", "pyright", "clangd", "bashls", "jsonls", "eslint" }
+local servers = { "ts_ls", "lua_ls", "pyright", "clangd", "bashls", "jsonls", "eslint", "marksman" }
 
 -- Ensure the servers above are installed
 require("mason-lspconfig").setup({
@@ -75,16 +75,30 @@ require("mason-tool-installer").setup({
 
 local null_ls = require("null-ls")
 
+function table.copy(t)
+  local u = { }
+  for k, v in pairs(t) do u[k] = v end
+  return setmetatable(u, getmetatable(t))
+end
+
+
+-- Remove range formatting from black cuz it won't allow gqq's on comments
+local black  = table.copy(null_ls.builtins.formatting.black)
+local methods = require("null-ls.methods")
+local FORMATTING = methods.internal.FORMATTING
+black.method = { FORMATTING }
+
 null_ls.setup({
     sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettierd,
-        null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.isort,
+        black,
         null_ls.builtins.diagnostics.codespell,
         null_ls.builtins.diagnostics.markdownlint
     },
 })
+
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -4,6 +4,10 @@ pyexec () {
     export $(cat .env | xargs) && poetry run python3 "$@"
 }
 
+nodexec () {
+    export $(cat .env | xargs) && node "$@"
+}
+
 l () {
     ledger -f $JOURNAL_PATH/journal.ledger "$@"
 }
