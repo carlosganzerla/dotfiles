@@ -53,19 +53,16 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Path and file settings
-vim.opt.path:append "**"
-vim.opt.wildignore:append "**/node_modules/**,**/__pycache__/**"
+vim.opt.path:append("**")
+vim.opt.wildignore:append("**/node_modules/**,**/__pycache__/**")
 vim.opt.wrapscan = true
 vim.opt.report = 0
 vim.opt.synmaxcol = 200
 
 -- List characters
-if vim.fn.has('multi_byte') and vim.opt.encoding == 'utf-8' then
-    vim.opt.listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
-else
-    vim.opt.listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
-end
-vim.o.mouse = ''
+vim.opt.list = true
+vim.opt.listchars = { trail = "~", extends = "❯", precedes = "❮", tab = "▸ ", nbsp = "±" }
+vim.o.mouse = ""
 
 -- Theme
 vim.cmd.colorscheme("catppuccin-mocha")
