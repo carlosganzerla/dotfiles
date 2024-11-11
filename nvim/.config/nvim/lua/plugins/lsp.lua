@@ -85,14 +85,16 @@ end
 
 -- Remove range formatting from black cuz it won't allow gqq's on comments
 local black = table.copy(null_ls.builtins.formatting.black)
+local prettierd = table.copy(null_ls.builtins.formatting.prettierd)
 local methods = require("null-ls.methods")
 local FORMATTING = methods.internal.FORMATTING
 black.method = { FORMATTING }
+prettierd.method = { FORMATTING }
 
 null_ls.setup({
     sources = {
         null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.prettierd,
+        prettierd,
         null_ls.builtins.formatting.isort,
         black,
         null_ls.builtins.diagnostics.codespell,
