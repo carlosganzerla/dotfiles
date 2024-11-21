@@ -9,6 +9,9 @@ local function my_on_attach(bufnr)
     api.config.mappings.default_on_attach(bufnr)
 
     vim.keymap.set('n', 'n', api.fs.create, opts('Create'))
+    vim.keymap.set('n', 'n', api.fs.create, opts('Create'))
+    vim.keymap.del('n', '<C-]>', { buffer = bufnr })
+    vim.keymap.del('n', '-', { buffer = bufnr })
 end
 
 -- pass to setup along with your other options

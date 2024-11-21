@@ -62,7 +62,7 @@ require("mason").setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { "ts_ls", "lua_ls", "pyright", "clangd", "bashls", "jsonls", "eslint", "marksman" }
+local servers = { "ts_ls", "lua_ls", "pyright", "clangd", "bashls", "jsonls", "eslint", "marksman", "cssls" }
 
 -- Ensure the servers above are installed
 require("mason-lspconfig").setup({

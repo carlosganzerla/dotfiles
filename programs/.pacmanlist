@@ -32,6 +32,7 @@ libxft
 libxinerama
 linux
 linux-firmware
+lsof
 meld
 mesa-utils
 neovim
@@ -112,3 +113,4 @@ xorg-xwininfo
 xorg-xwud
 xsel
 yarn
+zip
