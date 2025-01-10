@@ -3,6 +3,9 @@ xset led 3
 setxkbmap -option ctrl:nocaps
 setxkbmap br
 
+# Mouse stuff
+xinput set-prop 'HP, Inc HyperX Pulsefire Core' 'libinput Accel Speed' -0.5
+
 # Window compositor and manager
 xcompmgr -c &
 
