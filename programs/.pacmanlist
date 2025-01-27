@@ -20,6 +20,7 @@ glow
 gnu-free-fonts
 gnuplot
 grub
+hashcat
 htop
 iw
 iwd
@@ -47,6 +48,7 @@ os-prober
 pavucontrol
 pipewire
 pipewire-pulse
+pocl
 postgresql
 postgresql-libs
 pyenv
@@ -69,6 +71,7 @@ ttf-nerd-fonts-symbols
 ttf-sazanami
 unzip
 webkit2gtk
+whois
 wireplumber
 xcompmgr
 xf86-video-vesa
