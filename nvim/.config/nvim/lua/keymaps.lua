@@ -65,3 +65,6 @@ vim.keymap.set("n", "<leader><Left>", ":tabprev<CR>", { silent = true })
 
 -- Toggle tree
 vim.keymap.set('n', '<C-b>', ':NvimTreeToggle<CR>', { silent = true, noremap = true, nowait = true })
+
+-- Copy file name into + register
+vim.keymap.set('n', 'cp', ':let @+ = expand("%")<cr>', { silent= true, noremap = true  })
