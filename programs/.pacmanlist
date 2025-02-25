@@ -36,9 +36,9 @@ linux-firmware
 lsof
 meld
 mesa-utils
+meson
 neovim
 netctl
-nodejs-lts-hydrogen
 noto-fonts-emoji
 npm
 nvtop
@@ -46,6 +46,7 @@ obsidian
 ollama
 os-prober
 pavucontrol
+pgcli
 pipewire
 pipewire-pulse
 pocl
