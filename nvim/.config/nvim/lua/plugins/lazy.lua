@@ -35,7 +35,17 @@ require("lazy").setup({
             "j-hui/fidget.nvim",
         },
     },
-
+    {
+        "kristijanhusak/vim-dadbod-ui",
+        dependencies = {
+            { "tpope/vim-dadbod", lazy = true },
+        },
+        init = function()
+            vim.g.db_ui_winwidth = 30
+            vim.g.db_ui_use_nvim_notify = true
+            vim.g.db_ui_execute_on_save = 0
+        end,
+    },
     { -- Autocompletion
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -45,6 +55,7 @@ require("lazy").setup({
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
+            { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "postgresql" }, lazy = true },
         },
         config = function()
             -- nvim-cmp setup
@@ -114,7 +125,6 @@ require("lazy").setup({
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "vim-dadbod-completion" },
-                    { name = "neorg" },
                     {
                         name = "buffer",
                         option = {
@@ -143,23 +153,11 @@ require("lazy").setup({
             "nvim-treesitter/nvim-treesitter-textobjects",
         },
     },
-    { "catppuccin/nvim",         as = "catppuccin", priority = 10000 },
-    { "nvim-tree/nvim-tree.lua", lazy = false },
+    { "catppuccin/nvim",                      as = "catppuccin",            priority = 10000 },
+    { "nvim-tree/nvim-tree.lua",              lazy = false },
     { "David-Kunz/gen.nvim" },
     {
         "stevearc/conform.nvim",
         opts = {},
-    },
-    {
-        "kristijanhusak/vim-dadbod-ui",
-        dependencies = {
-            { "tpope/vim-dadbod",                     lazy = true },
-            { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "postgresql" }, lazy = true }, -- Optional
-        },
-        init = function()
-            vim.g.db_ui_winwidth = 30;
-            vim.g.db_ui_use_nvim_notify = true;
-            vim.g.db_ui_execute_on_save = 0;
-        end,
     },
 })
