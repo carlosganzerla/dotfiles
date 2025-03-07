@@ -2,5 +2,8 @@
 	tool = nvimdiff
 [core]
 	editor = nvim
+	pager = less
 [pull]
 	ff = only
+[rerere]
+	enabled = true

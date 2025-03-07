@@ -50,7 +50,6 @@ pgcli
 pipewire
 pipewire-pulse
 pocl
-postgresql
 postgresql-libs
 pyenv
 python-matplotlib
