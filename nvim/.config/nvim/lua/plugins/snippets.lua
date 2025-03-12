@@ -24,7 +24,6 @@ local function copy(args)
     return args[1]
 end
 
-
 ls.setup({
     keep_roots = true,
     link_roots = true,
@@ -58,7 +57,7 @@ ls.setup({
     -- require("luasnip.extras.filetype_functions").from_cursor (requires
     -- `nvim-treesitter/nvim-treesitter`). This allows correctly resolving
     -- the current filetype in eg. a markdown-code block or `vim.cmd()`.
-    ft_func = require("luasnip.extras.filetype_functions").from_cursor
+    ft_func = require("luasnip.extras.filetype_functions").from_cursor,
 })
 
 ls.add_snippets("markdown", {
@@ -69,7 +68,7 @@ ls.add_snippets("markdown", {
         t({ "", "", "## Fields", "", "## SQL", "", "```sql", "" }),
         t("CREATE TABLE "),
         f(copy, 1),
-        t({ " (", ");", "```" })
+        t({ " (", ");", "```" }),
     }),
     s("enumdoc", {
         t("# `"),
@@ -78,7 +77,7 @@ ls.add_snippets("markdown", {
         t({ "", "", "An enumeration...", "", "The following values apply:", "", "## SQL", "", "```sql", "" }),
         t("CREATE TYPE "),
         f(copy, 1),
-        t({ " AS ENUM (", ");", "```" })
+        t({ " AS ENUM (", ");", "```" }),
     }),
     s("funcdoc", {
         t("# `"),
@@ -90,8 +89,10 @@ ls.add_snippets("markdown", {
 
 ls.add_snippets("typescript", {
     s("eslint max lines", t("/* eslint max-lines-per-function: 0 */")),
-    s("jest test", fmt(
-        [[
+    s(
+        "jest test",
+        fmt(
+            [[
             describe('{}', () => {{
                 beforeEach(() => {{
                 }});
@@ -101,17 +102,21 @@ ls.add_snippets("typescript", {
                 }});
             }});
         ]],
-        {
-            i(1, "Feature"),
-            i(2, "does something"),
-            c(3, { t(""), t("async ") }),
-            i(0)
-        }))
-});
+            {
+                i(1, "Feature"),
+                i(2, "does something"),
+                c(3, { t(""), t("async ") }),
+                i(0),
+            }
+        )
+    ),
+})
 
 ls.add_snippets("typescriptreact", {
-    s("story", fmt(
-        [[
+    s(
+        "story",
+        fmt(
+            [[
             import React from 'react';
             import {{ StoryFn, Meta }} from '@storybook/react';
             import {{ {}, {}Props }} from './{}';
@@ -128,20 +133,23 @@ ls.add_snippets("typescriptreact", {
 
             export const Default = Template.bind({{}});
         ]],
-        {
-            i(1),
-            f(copy, 1),
-            f(copy, 1),
-            i(2),
-            f(copy, 1),
-            f(copy, 1),
-            i(0),
-            f(copy, 1),
-            f(copy, 1),
-        }
-    )),
-    s("visual component", fmt(
-        [[
+            {
+                i(1),
+                f(copy, 1),
+                f(copy, 1),
+                i(2),
+                f(copy, 1),
+                f(copy, 1),
+                i(0),
+                f(copy, 1),
+                f(copy, 1),
+            }
+        )
+    ),
+    s(
+        "visual component",
+        fmt(
+            [[
             import React from 'react';
 
             export type {}Props = {{
@@ -153,21 +161,23 @@ ls.add_snippets("typescriptreact", {
                 );
             }};
         ]],
-        {
-            i(1),
-            f(copy, 1),
-            f(copy, 1),
-            i(2),
-            i(0),
-            f(copy, 2),
-        }
-    )),
-
+            {
+                i(1),
+                f(copy, 1),
+                f(copy, 1),
+                i(2),
+                i(0),
+                f(copy, 2),
+            }
+        )
+    ),
 })
 
 ls.add_snippets("python", {
-    s("python test", fmt(
-        [[
+    s(
+        "python test",
+        fmt(
+            [[
             import pytest
             {}
             {}
@@ -176,26 +186,153 @@ ls.add_snippets("python", {
             def test_{}():
                 pass
         ]],
-        {
-            c(1, { t({ "from unittest.mock import Mock, AsyncMock", "" }), t("") }),
-            c(2, { fmt([[
+            {
+                c(1, { t({ "from unittest.mock import Mock, AsyncMock", "" }), t("") }),
+                c(2, {
+                    fmt(
+                        [[
             class Dependencies:
                 def __init__(self) -> None:
                     pass
-            ]], {}), t("") }),
-            c(3, {
-                fmt([[
+            ]],
+                        {}
+                    ),
+                    t(""),
+                }),
+                c(3, {
+                    fmt(
+                        [[
                     @pytest.fixture
                     def fixture():
-                ]], {}), t("") }),
-            c(4, { fmt([[
+                ]],
+                        {}
+                    ),
+                    t(""),
+                }),
+                c(4, {
+                    fmt(
+                        [[
                 @pytest.fixture
                 def dependencies():
                     return Dependencies()
-                ]], {}), t("") }),
-            i(5),
-        }
-    )),
+                ]],
+                        {}
+                    ),
+                    t(""),
+                }),
+                i(5),
+            }
+        )
+    ),
+})
+
+local function get_changeset(args, parent, nodate)
+    local name = vim.split(vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t"), ".", { plain = true })[1]
+    if nodate == true then
+        return string.sub(name, 12)
+    end
+    return name
+end
+
+ls.add_snippets("xml", {
+    s(
+        "dbchangelogfile",
+        fmt(
+            [[
+        <?xml version="1.1" encoding="UTF-8" standalone="no"?>
+        <databaseChangeLog
+            xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+            xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+            xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.liquibase.org/xml/ns/dbchangelog-ext
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                http://www.liquibase.org/xml/ns/pro
+                http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd
+                http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd"
+        >
+            <changeSet dbms="postgresql" author="carlo" id="{}">
+                <sqlFile
+                    splitStatements="false"
+                    path="{}.sql"
+                />
+                <rollback>
+                    <sqlFile
+                        splitStatements="false"
+                        path="{}.rollback.sql"
+                    />
+                </rollback>
+            </changeSet>
+        </databaseChangeLog>
+        ]],
+            {
+                f(get_changeset, {}, { user_args = { true } }),
+                f(get_changeset, {}, {}),
+                f(get_changeset, {}, {}),
+            }
+        )
+    ),
+    s(
+        "dbchangelogsql",
+        fmt(
+            [[
+        <?xml version="1.1" encoding="UTF-8" standalone="no"?>
+        <databaseChangeLog
+            xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+            xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+            xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.liquibase.org/xml/ns/dbchangelog-ext
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                http://www.liquibase.org/xml/ns/pro
+                http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd
+                http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd"
+        >
+            <changeSet dbms="postgresql" author="carlo" id="{}">
+            <sql>
+                {}
+            </sql>
+            <rollback>
+                <sql>
+                </sql>
+            </rollback>
+        </changeSet>
+        </databaseChangeLog>
+        ]],
+            {
+                f(get_changeset, {}, { user_args = { true } }),
+                i(0),
+            }
+        )
+    ),
+    s(
+        "dbchangesetpermissions",
+        fmt(
+            [[
+            <changeSet
+                context="production"
+                dbms="postgresql"
+                author="carlo"
+                id="{}">
+                <sql>
+                    {}
+                </sql>
+                <rollback>
+                    <sql>
+                    </sql>
+                </rollback>
+            </changeSet>
+        ]],
+            {
+                f(get_changeset, {}, { user_args = { true } }),
+                i(0)
+            }
+        )
+    ),
 })
 
 vim.keymap.set("n", "<leader><leader>s", "<cmd>luafile ~/.config/nvim/lua/plugins/snippets.lua<CR>")
