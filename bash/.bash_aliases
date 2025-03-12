@@ -1,7 +1,11 @@
 alias hax='cat ~/shell-tips.txt'
 
 pyexec () {
-    export $(cat .env | xargs) && poetry run python3 "$@"
+    export $(cat .env | xargs) && python3 "$@"
+}
+
+pydebug () {
+    export $(cat .env | xargs) && python3 -m pdb "$@"
 }
 
 nodexec () {

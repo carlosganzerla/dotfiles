@@ -35,17 +35,6 @@ require("lazy").setup({
             "j-hui/fidget.nvim",
         },
     },
-    {
-        "kristijanhusak/vim-dadbod-ui",
-        dependencies = {
-            { "tpope/vim-dadbod", lazy = true },
-        },
-        init = function()
-            vim.g.db_ui_winwidth = 30
-            vim.g.db_ui_use_nvim_notify = true
-            vim.g.db_ui_execute_on_save = 0
-        end,
-    },
     { -- Autocompletion
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -55,7 +44,6 @@ require("lazy").setup({
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
-            { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "postgresql" }, lazy = true },
         },
         config = function()
             -- nvim-cmp setup
@@ -124,7 +112,6 @@ require("lazy").setup({
                 sources = {
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
-                    { name = "vim-dadbod-completion" },
                     {
                         name = "buffer",
                         option = {
