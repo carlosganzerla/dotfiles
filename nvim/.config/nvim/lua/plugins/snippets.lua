@@ -317,7 +317,7 @@ ls.add_snippets("xml", {
                 context="production"
                 dbms="postgresql"
                 author="carlo"
-                id="{}">
+                id="{}-permissions">
                 <sql>
                     {}
                 </sql>
