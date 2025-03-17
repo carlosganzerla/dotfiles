@@ -67,3 +67,6 @@ vim.o.mouse = ""
 -- Theme
 vim.cmd.colorscheme("catppuccin-mocha")
 vim.cmd([[set spell]])
+
+-- Disable annoying sql autocomplete
+vim.g.omni_sql_no_default_maps = 1
