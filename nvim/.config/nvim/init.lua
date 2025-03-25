@@ -1,7 +1,6 @@
 require("keymaps")
 require("plugins.lazy")
 require("commands")
-require("functions")
 require("plugins.lsp")
 require("plugins.lualine")
 require("plugins.telescope")

@@ -51,6 +51,15 @@ vim.keymap.set("n", "<C-w><C-q>", "<nop>")
 
 -- Apply macros on visual mode. Source:
 -- https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+function ExecuteMacroOverVisualRange()
+    -- Get the macro register from the user input
+    local macro_register = vim.fn.nr2char(vim.fn.getchar())
+    -- Echo the macro register (for debugging purposes)
+    print("@" .. macro_register)
+    -- Execute the macro over the visual selection
+    vim.cmd(":'<,'>normal @" .. macro_register)
+end
+
 vim.keymap.set("x", "@", ":<C-u>lua ExecuteMacroOverVisualRange()<CR>", { noremap = true, silent = true })
 
 -- Disable arrows

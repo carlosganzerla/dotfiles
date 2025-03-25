@@ -140,8 +140,8 @@ require("lazy").setup({
             "nvim-treesitter/nvim-treesitter-textobjects",
         },
     },
-    { "catppuccin/nvim",                      as = "catppuccin",            priority = 10000 },
-    { "nvim-tree/nvim-tree.lua",              lazy = false },
+    { "catppuccin/nvim",         as = "catppuccin", priority = 10000 },
+    { "nvim-tree/nvim-tree.lua", lazy = false },
     { "David-Kunz/gen.nvim" },
     {
         "stevearc/conform.nvim",
