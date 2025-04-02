@@ -77,3 +77,14 @@ vim.keymap.set('n', '<C-b>', ':NvimTreeToggle<CR>', { silent = true, noremap = t
 
 -- Copy file name into + register
 vim.keymap.set('n', 'cp', ':let @+ = expand("%")<cr>', { silent= true, noremap = true  })
+
+-- Copilot settings
+vim.keymap.set('i', '<C-j>', '<Plug>(copilot-next)')
+vim.keymap.set('i', '<C-k>', '<Plug>(copilot-previous)')
+vim.keymap.set('i', '<C-l>', '<Plug>(copilot-suggest)')
+vim.keymap.set('i', '<C-Space>', '<Plug>(copilot-dismiss)')
+vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
+    expr = true,
+    replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true

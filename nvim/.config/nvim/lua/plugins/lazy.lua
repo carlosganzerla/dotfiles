@@ -61,7 +61,13 @@ require("lazy").setup({
                 mapping = cmp.mapping.preset.insert({
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-Space>"] = cmp.mapping.abort(),
+                    ["<C-Space>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.abort()
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
                     ["<C-y>"] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Replace,
                         select = true,
@@ -127,9 +133,10 @@ require("lazy").setup({
     },
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.8",
-        -- or                              , branch = '0.1.x',
         dependencies = { "nvim-lua/plenary.nvim" },
+    },
+    {
+        "nvim-telescope/telescope-ui-select.nvim",
     },
     { -- Highlight, edit, and navigate code
         "nvim-treesitter/nvim-treesitter",
@@ -142,9 +149,40 @@ require("lazy").setup({
     },
     { "catppuccin/nvim",         as = "catppuccin", priority = 10000 },
     { "nvim-tree/nvim-tree.lua", lazy = false },
-    { "David-Kunz/gen.nvim" },
+    { "github/copilot.vim" },
     {
-        "stevearc/conform.nvim",
-        opts = {},
+        {
+            "CopilotC-Nvim/CopilotChat.nvim",
+            dependencies = {
+                { "github/copilot.vim" },
+                { "nvim-lua/plenary.nvim", branch = "master" },
+            },
+            opts = {
+                mappings = {
+                    complete = {},
+                    close = {
+                        normal = "q",
+                    },
+                    reset = {
+                        normal = "<C-Space>",
+                    },
+                    submit_prompt = {
+                        normal = "<C-s>",
+                    },
+                    accept_diff = {
+                        normal = "<C-y>",
+                    },
+                    show_info = {
+                        normal = "gi",
+                    },
+                    show_context = {
+                        normal = "gc",
+                    },
+                    show_help = {
+                        normal = "gh",
+                    },
+                },
+            },
+        },
     },
 })

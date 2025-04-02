@@ -38,3 +38,5 @@ end, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>rg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>bl', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>bd', builtin.git_bcommits, { desc = 'Telescope git commits' })
+
+require('telescope').load_extension("ui-select")
