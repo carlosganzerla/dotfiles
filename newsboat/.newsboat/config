@@ -1,0 +1,21 @@
+# Define colors
+color listnormal         default    default    bold
+color listnormal_unread  color183   default    bold
+color listfocus          default    color240   bold
+color listfocus_unread   color183  color240    bold
+color info               color240  color183     bold
+
+feedlist-format "%8u   %n  [%T] - %t"
+articlelist-title-format "%T (%u unread, %t total) - %U"
+feedlist-title-format "Your feeds (%u unread, %t total)%?T? - tag ‘%T’&?"
+articlelist-format  "%n    %D    %t"
+
+
+# VIM bidings
+bind j everywhere down
+bind k everywhere up
+
+browser "google-chrome-stable %u"
+
+highlight article "^(Feed|Title|Author|Link|Date):" default default bold
+highlight article "https?://[^ ]+" color183 default bold
