@@ -1,0 +1,12 @@
+# https://clangd.llvm.org
+
+Diagnostics:
+  UnusedIncludes: Strict
+
+If:
+  PathMatch: ".*(\\\\|/)postgres(ql)?(\\\\|/).*\\.h"
+CompileFlags:
+  CompilationDatabase: build/
+  Add:
+    - "-include"
+    - "postgres.h"
