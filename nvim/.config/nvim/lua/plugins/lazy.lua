@@ -158,6 +158,12 @@ require("lazy").setup({
                 { "nvim-lua/plenary.nvim", branch = "master" },
             },
             opts = {
+                model = "claude-3.7-sonnet",
+                prompts = {
+                    Grammar = {
+                        prompt = "Improve grammar and spelling",
+                    },
+                },
                 mappings = {
                     complete = {},
                     close = {
