@@ -13,10 +13,10 @@ docker-compose
 dunst
 efibootmgr
 feh
+gdb
 geoip
 git
 github-cli
-glow
 gnu-free-fonts
 gnuplot
 grub
@@ -36,6 +36,7 @@ mesa-utils
 meson
 neovim
 netctl
+newsboat
 noto-fonts-emoji
 npm
 obsidian

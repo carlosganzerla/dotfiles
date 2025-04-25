@@ -28,6 +28,6 @@ ls.add_snippets("markdown", {
 		t("# `"),
 		i(1, "function"),
 		t("` function"),
-		t({ "", "", "This function...", "", "", "## Inputs", "", "", "## Output", "", "", "```sql", "", "```" }),
+		t({ "", "", "This function...", "", "", "## Inputs", "", "", "## Output", "", "## SQL", "", "```sql", "", "```" }),
 	}),
 })
