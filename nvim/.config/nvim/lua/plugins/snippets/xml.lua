@@ -72,14 +72,14 @@ ls.add_snippets("xml", {
                 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd"
         >
             <changeSet dbms="postgresql" author="carlo" id="{}">
-            <sql>
-                {}
-            </sql>
-            <rollback>
                 <sql>
+                    {}
                 </sql>
-            </rollback>
-        </changeSet>
+                <rollback>
+                    <sql>
+                    </sql>
+                </rollback>
+            </changeSet>
         </databaseChangeLog>
         ]],
             {
