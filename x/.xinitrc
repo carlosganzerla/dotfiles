@@ -21,4 +21,3 @@ dwmblocks &
 # Notifiction handler
 dunst &
 exec dwm
-

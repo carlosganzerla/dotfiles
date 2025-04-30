@@ -5,7 +5,8 @@ pkglist:
 
 # TODO: Automate AUR installation some day.
 all:
-	pacman -S - < ./programs/.pacmanlist;
+	pacman -Sy - < ./programs/.pacmanlist;
+	bash ./install_aur.sh;
 	cd ./programs/dwm && make clean && make install;
 	cd ./programs/dwmblocks && make clean && make install;
 	stow */;
