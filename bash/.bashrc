@@ -30,5 +30,5 @@ eval "$(pyenv init --path)"
 
 export UV_USE_IO_URING=0
 export SYSTEMD_EDITOR=nvim
-export PAGER=less
+export PAGER='less -X'
 export EDITOR=nvim

@@ -61,17 +61,37 @@ end
 -- Setup mason so it can manage external tooling
 require("mason").setup()
 
--- Enable the following language servers
--- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { "ts_ls", "lua_ls", "pyright", "clangd", "bashls", "jsonls", "eslint", "marksman", "cssls" }
+local servers = {
+    "ts_ls",
+    "lua_ls",
+    "pyright",
+    "clangd",
+    "bashls",
+    "jsonls",
+    "eslint",
+    "marksman",
+    "cssls",
+    "gopls",
+    "golangci_lint_ls",
+}
 
--- Ensure the servers above are installed
-require("mason-lspconfig").setup({
-    ensure_installed = servers,
-})
-
+-- Ensure the language servers and tools above installed
 require("mason-tool-installer").setup({
-    ensure_installed = { "isort", "black", "prettierd", "stylua", "codespell", "markdownlint" },
+    ensure_installed = {
+        unpack(servers),
+        "isort",
+        "black",
+        "prettierd",
+        "stylua",
+        "codespell",
+        "markdownlint",
+        "gofumpt",
+    },
+
+    integrations = {
+        ["mason-lspconfig"] = true,
+        ["mason-null-ls"] = true,
+    },
 })
 
 local null_ls = require("null-ls")
