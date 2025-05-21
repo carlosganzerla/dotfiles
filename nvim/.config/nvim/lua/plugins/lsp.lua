@@ -63,6 +63,7 @@ require("mason").setup()
 
 local servers = {
     "ts_ls",
+    "postgres_lsp",
     "lua_ls",
     "pyright",
     "clangd",
@@ -71,8 +72,6 @@ local servers = {
     "eslint",
     "marksman",
     "cssls",
-    "gopls",
-    "golangci_lint_ls",
 }
 
 -- Ensure the language servers and tools above installed
@@ -85,7 +84,6 @@ require("mason-tool-installer").setup({
         "stylua",
         "codespell",
         "markdownlint",
-        "gofumpt",
     },
 
     integrations = {
@@ -127,8 +125,10 @@ null_ls.setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+local lspconfig = require("lspconfig")
+
 for _, lsp in ipairs(servers) do
-    require("lspconfig")[lsp].setup({
+    lspconfig[lsp].setup({
         on_attach = on_attach,
         capabilities = capabilities,
     })
@@ -144,7 +144,7 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-require("lspconfig").lua_ls.setup({
+lspconfig.lua_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -166,4 +166,11 @@ require("lspconfig").lua_ls.setup({
             telemetry = { enable = false },
         },
     },
+})
+
+lspconfig.postgres_lsp.setup({
+    cmd = { "postgrestools", "lsp-proxy" },
+    filetypes = { "sql", "psql" },
+    single_file_support = true,
+    root_dir = lspconfig.util.root_pattern("postgrestools.jsonc"),
 })

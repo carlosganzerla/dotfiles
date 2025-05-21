@@ -133,10 +133,8 @@ require("lazy").setup({
     },
     {
         "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-    },
-    {
-        "nvim-telescope/telescope-ui-select.nvim",
+        dependencies = { "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-ui-select.nvim" },
     },
     { -- Highlight, edit, and navigate code
         "nvim-treesitter/nvim-treesitter",
@@ -151,42 +149,40 @@ require("lazy").setup({
     { "nvim-tree/nvim-tree.lua", lazy = false },
     { "github/copilot.vim" },
     {
-        {
-            "CopilotC-Nvim/CopilotChat.nvim",
-            dependencies = {
-                { "github/copilot.vim" },
-                { "nvim-lua/plenary.nvim", branch = "master" },
-            },
-            opts = {
-                model = "claude-3.7-sonnet",
-                prompts = {
-                    Grammar = {
-                        prompt = "Improve grammar and spelling",
-                    },
+        "CopilotC-Nvim/CopilotChat.nvim",
+        dependencies = {
+            { "github/copilot.vim" },
+            { "nvim-lua/plenary.nvim", branch = "master" },
+        },
+        opts = {
+            model = "claude-3.7-sonnet",
+            prompts = {
+                Grammar = {
+                    prompt = "Improve grammar and spelling",
                 },
-                mappings = {
-                    complete = {},
-                    close = {
-                        normal = "q",
-                    },
-                    reset = {
-                        normal = "<C-Space>",
-                    },
-                    submit_prompt = {
-                        normal = "<C-s>",
-                    },
-                    accept_diff = {
-                        normal = "<C-y>",
-                    },
-                    show_info = {
-                        normal = "gi",
-                    },
-                    show_context = {
-                        normal = "gc",
-                    },
-                    show_help = {
-                        normal = "gh",
-                    },
+            },
+            mappings = {
+                complete = {},
+                close = {
+                    normal = "q",
+                },
+                reset = {
+                    normal = "<C-Space>",
+                },
+                submit_prompt = {
+                    normal = "<C-s>",
+                },
+                accept_diff = {
+                    normal = "<C-y>",
+                },
+                show_info = {
+                    normal = "gi",
+                },
+                show_context = {
+                    normal = "gc",
+                },
+                show_help = {
+                    normal = "gh",
                 },
             },
         },

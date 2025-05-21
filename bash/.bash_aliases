@@ -53,4 +53,3 @@ alias display-monitor-only='xrandr --output HDMI-1 --auto && xrandr --output eDP
 alias display-both='xrandr --output eDP-1 --auto && xrandr --output HDMI-1 --left-of eDP-1'
 alias rmorigs='find . -name '*.orig' -delete'
 alias penv='eval $(poetry env activate)'
-alias pgcliwrap='LESS=-XF pgcli'
