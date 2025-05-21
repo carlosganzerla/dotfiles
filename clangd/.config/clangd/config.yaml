@@ -10,3 +10,11 @@ CompileFlags:
   Add:
     - "-include"
     - "postgres.h"
+---
+If:
+  PathExclude: ".*(\\\\|/)postgres(ql)?(\\\\|/).*\\.h"
+CompileFlags:
+  CompilationDatabase: build/
+  Add:
+    - "--include-directory"
+    - "/usr/local/pgsql/include/server"

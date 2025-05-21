@@ -127,6 +127,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 local lspconfig = require("lspconfig")
 
+-- Generic configs
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
         on_attach = on_attach,
@@ -168,7 +169,9 @@ lspconfig.lua_ls.setup({
     },
 })
 
+-- Postgres confgis
 lspconfig.postgres_lsp.setup({
+    enabled = false,
     cmd = { "postgrestools", "lsp-proxy" },
     filetypes = { "sql", "psql" },
     single_file_support = true,
