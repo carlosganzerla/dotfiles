@@ -32,4 +32,3 @@ export UV_USE_IO_URING=0
 export SYSTEMD_EDITOR=nvim
 export PAGER='less -X'
 export EDITOR=nvim
-PATH=$PATH:/usr/local/pgsql/bin

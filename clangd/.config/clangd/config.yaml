@@ -17,4 +17,4 @@ CompileFlags:
   CompilationDatabase: build/
   Add:
     - "--include-directory"
-    - "/usr/local/pgsql/include/server"
+    - "/usr/include/postgresql/server"

@@ -1,0 +1,9 @@
+\set QUIET 1
+\x auto
+\set version 'SELECT version();'
+\set custom_settings 'SELECT name, current_setting(name) FROM pg_settings WHERE source <> \'default\';'
+\set pid 'SELECT pg_backend_pid();'
+\set COMP_KEYWORD_CASE upper
+\unset QUIET
+
+:pid;
