@@ -155,7 +155,7 @@ require("lazy").setup({
             { "nvim-lua/plenary.nvim", branch = "master" },
         },
         opts = {
-            model = "claude-4-sonnet",
+            model = "gpt-4.1",
             prompts = {
                 Grammar = {
                     prompt = "Improve grammar and spelling",
