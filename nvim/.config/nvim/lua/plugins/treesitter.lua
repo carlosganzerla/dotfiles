@@ -14,6 +14,7 @@ require("nvim-treesitter.configs").setup({
         "html",
         "css",
         "javascript",
+        "ledger",
         "yaml",
         "json",
         "toml",
