@@ -4,7 +4,7 @@ vim.api.nvim_create_user_command("KillOtherBufers", "%bd|e#", {})
 
 vim.api.nvim_create_user_command("Find", ":NvimTreeFindFile", {})
 
-function PsqlQuery(database, range)
+function psql_query(database, range)
     local text = {}
     if range == 0 then
         text = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -30,5 +30,17 @@ function PsqlQuery(database, range)
 end
 
 vim.api.nvim_create_user_command("Psql", function(cmdargs)
-    PsqlQuery(cmdargs.args, cmdargs.range)
+    psql_query(cmdargs.args, cmdargs.range)
 end, { nargs = 1, range = "%"})
+
+function close_floats()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_get_config(win).relative == "win" then
+      vim.api.nvim_win_close(win, false)
+    end
+  end
+end
+
+vim.api.nvim_create_user_command("FloatClose", function()
+    close_floats()
+end, { nargs = 0 })
