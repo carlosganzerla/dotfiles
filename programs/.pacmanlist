@@ -19,6 +19,7 @@ git
 github-cli
 gnu-free-fonts
 gnuplot
+go
 grub
 htop
 iw
@@ -32,6 +33,7 @@ libxft
 libxinerama
 linux
 linux-firmware
+llvm
 lsof
 mesa-utils
 meson
@@ -44,10 +46,10 @@ obsidian
 ollama
 os-prober
 pavucontrol
-pgcli
 pipewire
 pipewire-pulse
 pocl
+postgresql
 postgresql-libs
 pyenv
 python-matplotlib
@@ -64,13 +66,13 @@ sudo
 syncthing
 tk
 ttf-dejavu
-ttf-font-awesome
 ttf-nerd-fonts-symbols
 ttf-sazanami
 unzip
 webkit2gtk
 whois
 wireplumber
+woff2-font-awesome
 xcompmgr
 xf86-video-vesa
 xorg-bdftopcf
