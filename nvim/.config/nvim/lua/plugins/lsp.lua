@@ -10,7 +10,11 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("lsp-attach-config", { clear = true }),
+  callback = function(args)
+    local bufnr = args.buf
+
 	-- NOTE: Remember that lua is a real programming language, and as such it is possible
 	-- to define small helper and utility functions so you don't have to repeat yourself
 	-- many times.
@@ -66,14 +70,14 @@ local on_attach = function(_, bufnr)
 			bufnr = bufnr,
 		})
 	end, { desc = "Format current buffer with LSP" })
-end
+  end,
+})
 
 -- Setup mason so it can manage external tooling
 require("mason").setup()
 
 local servers = {
 	"ts_ls",
-	"postgres_lsp",
 	"lua_ls",
 	"pyright",
 	"clangd",
@@ -137,14 +141,12 @@ null_ls.setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-local lspconfig = require("lspconfig")
-
 -- Generic configs
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
-		on_attach = on_attach,
+	vim.lsp.config(lsp, {
 		capabilities = capabilities,
 	})
+    vim.lsp.enable(lsp)
 end
 
 -- Turn on lsp status information. This is for debug only.
@@ -157,8 +159,7 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-lspconfig.lua_ls.setup({
-	on_attach = on_attach,
+vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -179,13 +180,4 @@ lspconfig.lua_ls.setup({
 			telemetry = { enable = false },
 		},
 	},
-})
-
--- Postgres confgis
-lspconfig.postgres_lsp.setup({
-	enabled = false,
-	cmd = { "postgrestools", "lsp-proxy" },
-	filetypes = { "sql", "psql" },
-	single_file_support = true,
-	root_dir = lspconfig.util.root_pattern("postgrestools.jsonc"),
 })
