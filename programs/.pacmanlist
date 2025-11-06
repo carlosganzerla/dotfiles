@@ -12,11 +12,15 @@ docker
 docker-compose
 dunst
 efibootmgr
+fastfetch
 feh
 gdb
 geoip
 git
+git-filter-repo
+git-lfs
 github-cli
+glow
 gnu-free-fonts
 gnuplot
 go
@@ -35,6 +39,7 @@ linux
 linux-firmware
 llvm
 lsof
+man-pages
 mesa-utils
 meson
 neovim
