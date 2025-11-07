@@ -16,7 +16,7 @@ vim.keymap.set("n", "<leader>qa", ":KillOtherBuffers<CR>", { silent = true })
 vim.keymap.set("n", "<leader>c", ":bp|bd #<CR>", { silent = true })
 
 -- Set 85 length on vertical split
-vim.keymap.set("n", "<leader>w", ":vertical resize 85<CR>", { silent = true })
+vim.keymap.set("n", "<leader>w", ":vertical resize 60<CR>", { silent = true })
 
 -- Navigation on Buffers
 vim.keymap.set("n", "<C-Right>", ":bnext<CR>", { silent = true })

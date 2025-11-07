@@ -14,6 +14,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp-attach-config", { clear = true }),
   callback = function(args)
     local bufnr = args.buf
+    if vim.filetype.match({ filename = args.file }) == "lisp" then
+      return
+    end
 
 	-- NOTE: Remember that lua is a real programming language, and as such it is possible
 	-- to define small helper and utility functions so you don't have to repeat yourself

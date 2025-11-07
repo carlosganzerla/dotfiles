@@ -19,6 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     "xiyaowong/nvim-transparent",
     "tpope/vim-abolish",
+    "kovisoft/slimv",
     "jremmen/vim-ripgrep",
     "nvim-lualine/lualine.nvim",
     "nvim-tree/nvim-web-devicons",
