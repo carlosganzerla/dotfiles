@@ -14,7 +14,7 @@ if [ -f ~/.private_bash_aliases ]; then
 fi
 
 if [ -f ~/.private_envs ]; then
-    export $(cat ~/.private_envs | xargs)
+    . ~/.private_envs
 fi
 
 # set PATH so it includes user's private bin if it exists
