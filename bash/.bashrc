@@ -22,6 +22,11 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/go/bin" ] ; then
+    PATH="$HOME/go/bin:$PATH"
+fi
+
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\H@\u \w]\$ '
