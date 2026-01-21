@@ -70,3 +70,11 @@ vim.cmd([[set spell]])
 
 -- Disable annoying sql autocomplete
 vim.g.omni_sql_no_default_maps = 1
+
+-- Correct TF filetype detection
+vim.filetype.add({
+  extension = {
+    tf = "terraform",
+    tfvars = "terraform",
+  },
+})
