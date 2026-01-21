@@ -11,69 +11,69 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp-attach-config", { clear = true }),
-  callback = function(args)
-    local bufnr = args.buf
-    if vim.filetype.match({ filename = args.file }) == "lisp" then
-      return
-    end
-
-	-- NOTE: Remember that lua is a real programming language, and as such it is possible
-	-- to define small helper and utility functions so you don't have to repeat yourself
-	-- many times.
-	--
-	-- In this case, we create a function that lets us more easily define mappings specific
-	-- for LSP related items. It sets the mode, buffer and description for us each time.
-	local nmap = function(keys, func, desc)
-		if desc then
-			desc = "LSP: " .. desc
+	group = vim.api.nvim_create_augroup("lsp-attach-config", { clear = true }),
+	callback = function(args)
+		local bufnr = args.buf
+		if vim.filetype.match({ filename = args.file }) == "lisp" then
+			return
 		end
 
-		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-	end
+		-- NOTE: Remember that lua is a real programming language, and as such it is possible
+		-- to define small helper and utility functions so you don't have to repeat yourself
+		-- many times.
+		--
+		-- In this case, we create a function that lets us more easily define mappings specific
+		-- for LSP related items. It sets the mode, buffer and description for us each time.
+		local nmap = function(keys, func, desc)
+			if desc then
+				desc = "LSP: " .. desc
+			end
 
-	local xmap = function(keys, func, desc)
-		if desc then
-			desc = "LSP: " .. desc
+			vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 		end
 
-		vim.keymap.set("x", keys, func, { buffer = bufnr, desc = desc })
-	end
+		local xmap = function(keys, func, desc)
+			if desc then
+				desc = "LSP: " .. desc
+			end
 
-	local builtin = require("telescope.builtin")
-	nmap("<F2>", vim.lsp.buf.rename, "Rename")
-	nmap("<leader>ac", vim.lsp.buf.code_action, "Code action")
-	xmap("<leader>ac", vim.lsp.buf.code_action, "Code action")
-	nmap("gd", vim.lsp.buf.definition, "Goto Definition")
-	nmap("gr", builtin.lsp_references, "Goto References")
-	nmap("gR", vim.lsp.buf.references, "Goto References LSP")
-	nmap("gi", vim.lsp.buf.implementation, "Goto Implementation")
-	nmap("gy", vim.lsp.buf.type_definition, "Type Definition")
-	nmap("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
-	nmap("<leader>s", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+			vim.keymap.set("x", keys, func, { buffer = bufnr, desc = desc })
+		end
 
-	nmap("gh", vim.lsp.buf.hover, "Hover Documentation")
-	nmap("gs", vim.lsp.buf.signature_help, "Signature Documentation")
+		local builtin = require("telescope.builtin")
+		nmap("<F2>", vim.lsp.buf.rename, "Rename")
+		nmap("<leader>ac", vim.lsp.buf.code_action, "Code action")
+		xmap("<leader>ac", vim.lsp.buf.code_action, "Code action")
+		nmap("gd", vim.lsp.buf.definition, "Goto Definition")
+		nmap("gr", builtin.lsp_references, "Goto References")
+		nmap("gR", vim.lsp.buf.references, "Goto References LSP")
+		nmap("gi", vim.lsp.buf.implementation, "Goto Implementation")
+		nmap("gy", vim.lsp.buf.type_definition, "Type Definition")
+		nmap("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
+		nmap("<leader>s", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
-	-- Lesser used LSP functionality
-	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-	nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-	nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-	nmap("<leader>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, "[W]orkspace [L]ist Folders")
+		nmap("gh", vim.lsp.buf.hover, "Hover Documentation")
+		nmap("gs", vim.lsp.buf.signature_help, "Signature Documentation")
 
-	-- Create a command `:Format` local to the LSP buffer
-	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-		vim.lsp.buf.format({
-			filter = function(client)
-				local clients = { "null-ls" }
-				return vim.tbl_contains(clients, client.name)
-			end,
-			bufnr = bufnr,
-		})
-	end, { desc = "Format current buffer with LSP" })
-  end,
+		-- Lesser used LSP functionality
+		nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+		nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+		nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+		nmap("<leader>wl", function()
+			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		end, "[W]orkspace [L]ist Folders")
+
+		-- Create a command `:Format` local to the LSP buffer
+		vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+			vim.lsp.buf.format({
+				filter = function(client)
+					local clients = { "null-ls" }
+					return vim.tbl_contains(clients, client.name)
+				end,
+				bufnr = bufnr,
+			})
+		end, { desc = "Format current buffer with LSP" })
+	end,
 })
 
 -- Setup mason so it can manage external tooling
@@ -89,6 +89,7 @@ local servers = {
 	"eslint",
 	"marksman",
 	"cssls",
+	"terraformls",
 }
 
 -- Ensure the language servers and tools above installed
@@ -102,6 +103,7 @@ require("mason-tool-installer").setup({
 		"stylua",
 		"codespell",
 		"markdownlint",
+		"tflint",
 	},
 
 	integrations = {
@@ -137,6 +139,8 @@ null_ls.setup({
 		black,
 		null_ls.builtins.diagnostics.codespell,
 		null_ls.builtins.diagnostics.markdownlint,
+		null_ls.builtins.formatting.terraform_fmt,
+		null_ls.builtins.diagnostics.tflint,
 	},
 })
 
@@ -149,7 +153,7 @@ for _, lsp in ipairs(servers) do
 	vim.lsp.config(lsp, {
 		capabilities = capabilities,
 	})
-    vim.lsp.enable(lsp)
+	vim.lsp.enable(lsp)
 end
 
 -- Turn on lsp status information. This is for debug only.

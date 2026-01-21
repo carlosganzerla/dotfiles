@@ -22,6 +22,7 @@ require("nvim-treesitter.configs").setup({
         "c",
         "go",
         "gomod",
+        "terraform"
     },
 
     highlight = { enable = true },
