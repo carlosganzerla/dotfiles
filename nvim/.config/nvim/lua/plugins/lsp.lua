@@ -103,7 +103,6 @@ require("mason-tool-installer").setup({
 		"stylua",
 		"codespell",
 		"markdownlint",
-		"tflint",
 	},
 
 	integrations = {
@@ -140,7 +139,6 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.codespell,
 		null_ls.builtins.diagnostics.markdownlint,
 		null_ls.builtins.formatting.terraform_fmt,
-		null_ls.builtins.diagnostics.tflint,
 	},
 })
 

@@ -37,11 +37,12 @@ xact () {
 }
 
 setup-artifact() {
-    export CODEARTIFACT_TOKEN=$(aws codeartifact get-authorization-token \
+    export CODEARTIFACT_TOKEN=$(aws --profile prod codeartifact get-authorization-token \
         --domain alude --query authorizationToken --output text) &&
     poetry config http-basic.codeartifact-read aws $CODEARTIFACT_TOKEN
     poetry config http-basic.codeartifact-write aws $CODEARTIFACT_TOKEN
 }
+
 
 ollama-unload() {
     curl http://localhost:11434/api/generate -d '{"model": "'$1'", "keep_alive": 0}'
