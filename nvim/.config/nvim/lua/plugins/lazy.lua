@@ -148,42 +148,16 @@ require("lazy").setup({
 	{ "nvim-tree/nvim-tree.lua", lazy = false },
 	{ "github/copilot.vim" },
 	{
-		"CopilotC-Nvim/CopilotChat.nvim",
+		"olimorris/codecompanion.nvim",
+		version = "^18.0.0",
+		opts = {},
 		dependencies = {
-			{ "github/copilot.vim" },
-			{ "nvim-lua/plenary.nvim", branch = "master" },
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
 		},
-		opts = {
-			model = "gpt-5",
-			prompts = {
-				Grammar = {
-					prompt = "Improve grammar and spelling",
-				},
-			},
-			mappings = {
-				complete = {},
-				close = {
-					normal = "q",
-				},
-				reset = {
-					normal = "<C-Space>",
-				},
-				submit_prompt = {
-					normal = "<C-s>",
-				},
-				accept_diff = {
-					normal = "<C-y>",
-				},
-				show_info = {
-					normal = "gi",
-				},
-				show_context = {
-					normal = "gc",
-				},
-				show_help = {
-					normal = "gh",
-				},
-			},
-		},
+	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown", "codecompanion" },
 	},
 })
