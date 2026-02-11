@@ -186,3 +186,7 @@ vim.lsp.config("lua_ls", {
 		},
 	},
 })
+
+vim.g.copilot_settings = {
+  selectedCompletionModel = "gpt-5.2-codex",
+}

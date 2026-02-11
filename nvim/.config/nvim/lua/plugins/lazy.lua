@@ -156,8 +156,20 @@ require("lazy").setup({
 			"nvim-treesitter/nvim-treesitter",
 		},
 	},
+	{ "github/copilot.vim" },
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		ft = { "markdown", "codecompanion" },
+	},
+	{
+		"ravitemer/mcphub.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		config = function()
+			require("mcphub").setup({
+				cmd = "mcp-hub",
+			})
+		end,
 	},
 })
