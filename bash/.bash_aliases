@@ -25,7 +25,7 @@ xact () {
     echo "$xact_fmt";
     if [ $? -eq 0 ]; then
         read -p "Write to ledger? [y/n] " yn
-        case $yn in 
+        case $yn in
             [yY] )
                 echo "" >> $JOURNAL_PATH/journal.ledger;
                 echo "$xact_fmt" >> $JOURNAL_PATH/journal.ledger;
@@ -48,8 +48,40 @@ ollama-unload() {
     curl http://localhost:11434/api/generate -d '{"model": "'$1'", "keep_alive": 0}'
 }
 
+tfplandiff () {
+    cat $1 | jq -r '
+    .resource_changes[]
+    | select(.change.actions[0] != "no-op")
+    | . as $change
+    | (
+        # Print the Header (Action + Address)
+        "------------------------------------------------------------------------\n" +
+        ($change.change.actions | join("/") | ascii_upcase) + ": " + $change.address + "\n"
+        ),
+        (
+        # If it is an UPDATE, find the changed fields
+        if $change.change.actions == ["update"] then
+            (
+            $change.change.before as $old |
+            $change.change.after as $new |
+            ($old | keys_unsorted) as $keys |
+            $keys[] |
+            select($old[.] != $new[.]) |
+            "  ~ " + . + ": \"" + ($old[.] | tostring) + "\" -> \"" + ($new[.] | tostring) + "\""
+            )
+        else
+            empty
+        end
+        )
+    '
+}
+
+tfplandigested () {
+    terraform plan -out=/tmp/plan.bin &> /dev/null
+    terraform show -json /tmp/plan.bin > /tmp/plan.json && tfplandiff /tmp/plan.json
+}
+
 alias pyblack='poetry run black . --line-length 79'
-alias vimdiff='nvim -d'
 alias display-monitor-only='xrandr --output HDMI-1 --auto && xrandr --output eDP-1 --off'
 alias display-both='xrandr --output eDP-1 --auto && xrandr --output HDMI-1 --left-of eDP-1'
 alias rmorigs='find . -name '*.orig' -delete'

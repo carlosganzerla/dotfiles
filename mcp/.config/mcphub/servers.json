@@ -1,22 +1,15 @@
 {
   "mcpServers": {
     "chrome-devtools": {
-      "args": [
-        "-y",
-        "chrome-devtools-mcp@latest"
-      ],
+      "args": ["-y", "chrome-devtools-mcp@latest"],
       "command": "npx"
     },
     "fetch": {
-      "args": [
-        "mcp-server-fetch"
-      ],
+      "args": ["mcp-server-fetch"],
       "command": "uvx"
     },
     "git": {
-      "args": [
-        "mcp-server-git"
-      ],
+      "args": ["mcp-server-git"],
       "command": "uvx",
       "disabled": true
     },
@@ -28,10 +21,7 @@
       "url": "https://api.githubcopilot.com/mcp/"
     },
     "memory": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-memory"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
       "command": "npx",
       "disabled": false
     },
@@ -40,20 +30,34 @@
       "url": "https://mcp.sentry.dev/mcp"
     },
     "sequentialthinking": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
       "command": "npx",
       "disabled": false
     },
     "stack-mcp-server": {
-      "args": [
-        "mcp-remote",
-        "mcp.stackoverflow.com"
-      ],
+      "args": ["mcp-remote", "mcp.stackoverflow.com"],
       "command": "npx",
       "disabled": true
+    },
+    "awslabs.terraform-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.terraform-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-documentation-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "AWS_DOCUMENTATION_PARTITION": "aws",
+        "MCP_USER_AGENT": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+      },
+      "disabled": false,
+      "autoApprove": []
     }
   }
 }
