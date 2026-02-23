@@ -81,6 +81,11 @@ tfplandigested () {
     terraform show -json /tmp/plan.bin > /tmp/plan.json && tfplandiff /tmp/plan.json
 }
 
+tfplansummary () {
+    terraform plan -out=/tmp/plan.bin &> /dev/null
+    terraform show -json /tmp/plan.bin | tf-summarize $@
+}
+
 alias pyblack='poetry run black . --line-length 79'
 alias display-monitor-only='xrandr --output HDMI-1 --auto && xrandr --output eDP-1 --off'
 alias display-both='xrandr --output eDP-1 --auto && xrandr --output HDMI-1 --left-of eDP-1'

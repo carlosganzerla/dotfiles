@@ -1,7 +1,6 @@
 7zip
 alsa-utils
 at
-aws-cli
 base
 base-devel
 bash-completion
@@ -18,6 +17,7 @@ efibootmgr
 fastfetch
 feh
 gdb
+gemini-cli
 git
 git-filter-repo
 git-lfs
@@ -72,11 +72,14 @@ sbcl
 scrot
 stow
 sudo
+terraform
+tflint
 tk
 ttf-dejavu
 ttf-nerd-fonts-symbols
 ttf-sazanami
 unzip
+uv
 webkit2gtk
 whois
 wireplumber
