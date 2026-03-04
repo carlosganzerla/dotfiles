@@ -56,13 +56,6 @@
       ],
       "command": "npx"
     },
-    "stack-mcp-server": {
-      "args": [
-        "mcp-remote",
-        "mcp.stackoverflow.com"
-      ],
-      "command": "npx"
-    },
     "awslabs.terraform-mcp-server": {
       "command": "uvx",
       "args": [

@@ -76,14 +76,40 @@ tfplandiff () {
     '
 }
 
-tfplandigested () {
-    terraform plan -out=/tmp/plan.bin &> /dev/null
-    terraform show -json /tmp/plan.bin > /tmp/plan.json && tfplandiff /tmp/plan.json
+tfplansummary () {
+  terraform validate
+
+  if [ $? -ne 0 ]; then
+    echo "Terraform validation failed. Please fix the issues before running tfplanvim."
+    return 1
+  fi
+
+  local output
+  output=$(terraform plan -out=/tmp/plan.bin 2>&1)
+
+  if [ $? -eq 0 ]; then
+    terraform show -json /tmp/plan.bin | tf-summarize $@
+  else
+    echo "$output"
+  fi
 }
 
-tfplansummary () {
-    terraform plan -out=/tmp/plan.bin &> /dev/null
-    terraform show -json /tmp/plan.bin | tf-summarize $@
+tfplanvim() {
+  terraform validate
+
+  if [ $? -ne 0 ]; then
+    echo "Terraform validation failed. Please fix the issues before running tfplanvim."
+    return 1
+  fi
+
+  local output
+  output=$(terraform plan -out=/tmp/plan.bin 2>&1)
+
+  if [ $? -eq 0 ]; then
+    terraform show -no-color /tmp/plan.bin | nvim -c 'setlocal buftype=nofile foldmethod=indent' -
+  else
+    echo "$output"
+  fi
 }
 
 alias pyblack='poetry run black . --line-length 79'

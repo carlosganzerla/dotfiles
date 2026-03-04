@@ -147,29 +147,4 @@ require("lazy").setup({
 	{ "catppuccin/nvim", as = "catppuccin", priority = 10000 },
 	{ "nvim-tree/nvim-tree.lua", lazy = false },
 	{ "github/copilot.vim" },
-	{
-		"olimorris/codecompanion.nvim",
-		version = "^18.0.0",
-		opts = {},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-	},
-	{ "github/copilot.vim" },
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		ft = { "markdown", "codecompanion" },
-	},
-	{
-		"ravitemer/mcphub.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			require("mcphub").setup({
-				cmd = "mcp-hub",
-			})
-		end,
-	},
 })
