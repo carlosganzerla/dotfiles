@@ -8,7 +8,12 @@
     "vimMode": false,
     "previewFeatures": true,
     "preferredEditor": "neovim",
-    "showLineNumbers": false
+    "showLineNumbers": false,
+    "sessionRetention": {
+      "enabled": true,
+      "maxAge": "30d",
+      "warningAcknowledged": true
+    }
   },
   "ui": {
     "theme": "Shades Of Purple"
@@ -63,8 +68,7 @@
       ],
       "env": {
         "FASTMCP_LOG_LEVEL": "ERROR"
-      },
-      "autoApprove": []
+      }
     },
     "awslabs.aws-documentation-mcp-server": {
       "command": "uvx",
@@ -75,8 +79,7 @@
         "FASTMCP_LOG_LEVEL": "ERROR",
         "AWS_DOCUMENTATION_PARTITION": "aws",
         "MCP_USER_AGENT": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
-      },
-      "autoApprove": []
+      }
     }
   }
 }

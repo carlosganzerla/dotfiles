@@ -85,7 +85,7 @@ tfplansummary () {
   fi
 
   local output
-  output=$(terraform plan -out=/tmp/plan.bin 2>&1)
+  output=$(terraform plan -parallelism=50 -out=/tmp/plan.bin 2>&1)
 
   if [ $? -eq 0 ]; then
     terraform show -json /tmp/plan.bin | tf-summarize $@
@@ -110,6 +110,16 @@ tfplanvim() {
   else
     echo "$output"
   fi
+}
+
+toggle-profile() {
+    if [ "$AWS_PROFILE" = "dev" ]; then
+        export AWS_PROFILE=prod
+        echo "Switched to prod profile"
+    else
+        export AWS_PROFILE=dev
+        echo "Switched to dev profile"
+    fi
 }
 
 alias pyblack='poetry run black . --line-length 79'
