@@ -1,19 +1,25 @@
+DWM_INSTALL = cd ./programs/dwm && make clean && make install; cd ./programs/dwmblocks && make clean && make install;
+
+all: gemini pacman aur dwm dotfiles
+
+gemini:
+	bash ./scripts/.local/bin/install-gemini-assets
+
+pacman:
+	pacman -Sy - < ./programs/.pacmanlist
+
+aur:
+	bash ./install_aur.sh
+
+dwm:
+	$(DWM_INSTALL)
+
+dotfiles:
+	stow */
+
 pkglist:
 	cd ./programs && \
 		pacman -Qqen > .pacmanlist && \
-		pacman -Qqem > .pacmanlistaur;
+		pacman -Qqem > .pacmanlistaur
 
-# TODO: Automate AUR installation some day.
-all:
-	pacman -Sy - < ./programs/.pacmanlist;
-	bash ./install_aur.sh;
-	cd ./programs/dwm && make clean && make install;
-	cd ./programs/dwmblocks && make clean && make install;
-	stow */;
-
-dwm:
-	cd ./programs/dwm && make clean && make install;
-	cd ./programs/dwmblocks && make clean && make install;
-
-dotfiles:
-	stow */;
+.PHONY: all gemini pacman aur dwm dotfiles pkglist

@@ -1,0 +1,6 @@
+# Add Gemini Extension git URLs here (one per line)
+https://github.com/gemini-cli-extensions/code-review
+https://github.com/gemini-cli-extensions/jules
+https://github.com/gemini-cli-extensions/security
+https://github.com/thoreinstein/gemini-notifier
+https://github.com/gemini-cli-extensions/postgres

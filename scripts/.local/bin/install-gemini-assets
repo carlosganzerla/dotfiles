@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Define paths relative to the dotfiles root
+DOTFILES_DIR="$HOME/dotfiles"
+SKILLS_FILE="$DOTFILES_DIR/gemini/skills.txt"
+EXTENSIONS_FILE="$DOTFILES_DIR/gemini/extensions.txt"
+
+# Function to install from a file
+install_from_file() {
+    local file=$1
+    local type=$2 # "skills" or "extensions"
+
+    if [[ ! -f "$file" ]]; then
+        echo "Warning: $file not found. Skipping $type installation."
+        return
+    fi
+
+    echo "--- Installing Gemini $type ---"
+    while IFS= read -r url || [[ -n "$url" ]]; do
+        # Skip empty lines and comments
+        [[ -z "$url" || "$url" =~ ^# ]] && continue
+
+        echo "Installing $type: $url"
+        if gemini "$type" install "$url"; then
+            echo "Successfully installed $url"
+        else
+            echo "Error: Failed to install $url"
+        fi
+    done < "$file"
+}
+
+# Install Skills
+install_from_file "$SKILLS_FILE" "skills"
+
+# Install Extensions
+install_from_file "$EXTENSIONS_FILE" "extensions"
+
+echo "--- Gemini installation complete ---"

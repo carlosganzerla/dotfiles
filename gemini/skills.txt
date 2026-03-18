@@ -1,0 +1,2 @@
+# Add Gemini Skill git URLs here (one per line)
+https://github.com/antonbabenko/terraform-skill
