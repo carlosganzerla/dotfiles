@@ -43,57 +43,6 @@ setup-artifact() {
     poetry config http-basic.codeartifact-write aws $CODEARTIFACT_TOKEN
 }
 
-
-ollama-unload() {
-    curl http://localhost:11434/api/generate -d '{"model": "'$1'", "keep_alive": 0}'
-}
-
-tfplandiff () {
-    cat $1 | jq -r '
-    .resource_changes[]
-    | select(.change.actions[0] != "no-op")
-    | . as $change
-    | (
-        # Print the Header (Action + Address)
-        "------------------------------------------------------------------------\n" +
-        ($change.change.actions | join("/") | ascii_upcase) + ": " + $change.address + "\n"
-        ),
-        (
-        # If it is an UPDATE, find the changed fields
-        if $change.change.actions == ["update"] then
-            (
-            $change.change.before as $old |
-            $change.change.after as $new |
-            ($old | keys_unsorted) as $keys |
-            $keys[] |
-            select($old[.] != $new[.]) |
-            "  ~ " + . + ": \"" + ($old[.] | tostring) + "\" -> \"" + ($new[.] | tostring) + "\""
-            )
-        else
-            empty
-        end
-        )
-    '
-}
-
-tfplansummary () {
-  terraform validate
-
-  if [ $? -ne 0 ]; then
-    echo "Terraform validation failed. Please fix the issues before running tfplanvim."
-    return 1
-  fi
-
-  local output
-  output=$(terraform plan -parallelism=50 -out=/tmp/plan.bin 2>&1)
-
-  if [ $? -eq 0 ]; then
-    terraform show -json /tmp/plan.bin | tf-summarize $@
-  else
-    echo "$output"
-  fi
-}
-
 tfplanvim() {
   terraform validate
 
@@ -103,13 +52,17 @@ tfplanvim() {
   fi
 
   local output
-  output=$(terraform plan -out=/tmp/plan.bin 2>&1)
+  output=$(terraform plan -parallelism=100 -out=/tmp/plan.bin 2>&1)
 
   if [ $? -eq 0 ]; then
     terraform show -no-color /tmp/plan.bin | nvim -c 'setlocal buftype=nofile foldmethod=indent' -
   else
     echo "$output"
   fi
+}
+
+tfapply () {
+    terraform apply -parallelism=100
 }
 
 toggle-profile() {
