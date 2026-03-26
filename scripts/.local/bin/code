@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ "$*" == *"--diff"* ]]; then
+  files=()
+  for arg in "$@"; do
+    [[ "$arg" != "--diff" && "$arg" != "-w" && "$arg" != "--wait" ]] && files+=("$arg")
+  done
+  exec nvim -d "${files[@]}"
+else
+  # Use the absolute path to your real VS Code binary so it doesn't loop
+  exec /usr/bin/code "$@"
+fi

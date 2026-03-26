@@ -1,15 +1,19 @@
 alias hax='cat ~/shell-tips.txt'
 
-pyexec () {
-    export $(cat .env | xargs) && python3 "$@"
+export-env() {
+    eval $(sed 's/=\(.*\)/=\"\1\"/g' dev.env | grep -v '^\s*$\|^\s*#' | sed 's/^/export /')
 }
 
-pydebug () {
-    export $(cat .env | xargs) && python3 -m pdb "$@"
+attach() {
+    docker compose run --rm --service-ports "$1" /bin/bash
+}
+
+pyexec () {
+    export-env && python3 "$@"
 }
 
 nodexec () {
-    export $(cat .env | xargs) && node "$@"
+    export-env && node "$@"
 }
 
 l () {
@@ -37,7 +41,7 @@ xact () {
 }
 
 setup-artifact() {
-    export CODEARTIFACT_TOKEN=$(aws --profile dev codeartifact get-authorization-token \
+    export CODEARTIFACT_TOKEN=$(aws --profile alude-sso-dev codeartifact get-authorization-token \
         --domain alude --query authorizationToken --output text) &&
     poetry config http-basic.codeartifact-read aws $CODEARTIFACT_TOKEN
     poetry config http-basic.codeartifact-write aws $CODEARTIFACT_TOKEN
@@ -66,11 +70,11 @@ tfapply () {
 }
 
 toggle-profile() {
-    if [ "$AWS_PROFILE" = "dev" ]; then
-        export AWS_PROFILE=prod
+    if [ "$AWS_PROFILE" = "alude-sso-dev" ]; then
+        export AWS_PROFILE=alude-sso-prod
         echo "Switched to prod profile"
     else
-        export AWS_PROFILE=dev
+        export AWS_PROFILE=alude-sso-dev
         echo "Switched to dev profile"
     fi
 }
