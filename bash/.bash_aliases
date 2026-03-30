@@ -1,4 +1,4 @@
-alias hax='cat ~/shell-tips.txt'
+export DC_CMDS=(attach build commit config cp create down events exec export images kill logs ls pause port ps publish pull push restart rm run scale start stats stop top unpause up version volumes wait watch)
 
 export-env() {
     eval $(sed 's/=\(.*\)/=\"\1\"/g' dev.env | grep -v '^\s*$\|^\s*#' | sed 's/^/export /')
@@ -13,10 +13,6 @@ pr-submit() {
         return 1
     fi
     gh pr create --fill --base devel -b "Subject: $sbj"
-}
-
-attach() {
-    docker compose run --rm --service-ports "$1" /bin/bash
 }
 
 pyexec () {
@@ -90,7 +86,6 @@ toggle-profile() {
     fi
 }
 
-export DC_CMDS=($(docker compose --help | awk '/^Commands:/{flag=1; next} /^[A-Z]/{flag=0} flag {print $1}'))
 # 2. Dynamically Generate the Execution Functions
 for cmd in "${DC_CMDS[@]}"; do
     eval "compose-${cmd}() { (cd \"\$CONTAINER_ROOT_DIR\" && docker compose ${cmd} \"\$@\"); }"
@@ -143,3 +138,4 @@ alias display-monitor-only='xrandr --output HDMI-1 --auto && xrandr --output eDP
 alias display-both='xrandr --output eDP-1 --auto && xrandr --output HDMI-1 --left-of eDP-1'
 alias rmorigs='find . -name '*.orig' -delete'
 alias penv='eval $(poetry env activate)'
+alias hax='cat ~/shell-tips.txt'
