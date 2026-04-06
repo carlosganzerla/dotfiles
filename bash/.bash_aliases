@@ -5,8 +5,8 @@ export-env() {
 }
 
 pr-submit() {
-    sbj=""
-    $(read -p "Subject: ") sbj
+    local sbj=""
+    read -p "Subject: " sbj
 
     if [ -z "$sbj" ]; then
         echo "Subject cannot be empty. Aborting PR creation."
