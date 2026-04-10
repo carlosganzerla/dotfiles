@@ -9,10 +9,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-if [ -f ~/.private_bash_aliases ]; then
-    . ~/.private_bash_aliases
-fi
-
 if [ -f ~/.private_envs ]; then
     . ~/.private_envs
 fi
@@ -37,3 +33,4 @@ export UV_USE_IO_URING=0
 export SYSTEMD_EDITOR=nvim
 export PAGER='less -X'
 export EDITOR=nvim
+source /home/carlo/.alude_aliases

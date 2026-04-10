@@ -1,5 +1,3 @@
-export DC_CMDS=(attach build commit config cp create down events exec export images kill logs ls pause port ps publish pull push restart rm run scale start stats stop top unpause up version volumes wait watch)
-
 export-env() {
     eval $(sed 's/=\(.*\)/=\"\1\"/g' dev.env | grep -v '^\s*$\|^\s*#' | sed 's/^/export /')
 }
@@ -75,63 +73,6 @@ tfplanvim() {
 tfapply () {
     terraform apply -parallelism=100
 }
-
-toggle-profile() {
-    if [ "$AWS_PROFILE" = "alude-sso-dev" ]; then
-        export AWS_PROFILE=alude-sso-prod
-        echo "Switched to prod profile"
-    else
-        export AWS_PROFILE=alude-sso-dev
-        echo "Switched to dev profile"
-    fi
-}
-
-# 2. Dynamically Generate the Execution Functions
-for cmd in "${DC_CMDS[@]}"; do
-    eval "compose-${cmd}() { (cd \"\$CONTAINER_ROOT_DIR\" && docker compose ${cmd} \"\$@\"); }"
-done
-
-# 3. The Universal Auto-Complete Router
-_dc_alias_complete() {
-    if ! complete -p docker &>/dev/null; then
-        if type _completion_loader &>/dev/null; then
-            _completion_loader docker 2>/dev/null
-        else
-            source /usr/share/bash-completion/completions/docker 2>/dev/null
-        fi
-    fi
-
-    local docker_func
-    docker_func=$(complete -p docker 2>/dev/null | sed -n 's/.*-F \([^ ]*\).*/\1/p')
-
-    if [[ -z "$docker_func" ]] || ! declare -f "$docker_func" >/dev/null; then
-        return 0
-    fi
-
-    local triggered_alias="${COMP_WORDS[0]}"
-    local docker_cmd="${triggered_alias#compose-}"
-
-    local new_words=("docker" "compose" "$docker_cmd")
-    for (( i=1; i<${#COMP_WORDS[@]}; i++ )); do
-        new_words+=("${COMP_WORDS[i]}")
-    done
-    COMP_WORDS=("${new_words[@]}")
-    COMP_CWORD=$((COMP_CWORD + 2))
-
-    COMP_LINE="docker compose ${docker_cmd}${COMP_LINE#$triggered_alias}"
-    COMP_POINT=$((COMP_POINT + 7))
-
-    local cur="${COMP_WORDS[COMP_CWORD]}"
-    local prev="${COMP_WORDS[COMP_CWORD-1]}"
-
-    pushd "$CONTAINER_ROOT_DIR" >/dev/null 2>&1 || return
-    "$docker_func" "docker" "$cur" "$prev"
-    popd >/dev/null 2>&1
-}
-
-# 4. THE SICK PART: Bind the completion dynamically!
-# The /#/ syntax automatically prepends "compose-" to every single item in the DC_CMDS array.
-complete -F _dc_alias_complete "${DC_CMDS[@]/#/compose-}"
 
 alias pyblack='poetry run black . --line-length 79'
 alias display-monitor-only='xrandr --output HDMI-1 --auto && xrandr --output eDP-1 --off'

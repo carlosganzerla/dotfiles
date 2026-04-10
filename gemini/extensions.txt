@@ -4,3 +4,4 @@ https://github.com/gemini-cli-extensions/jules
 https://github.com/gemini-cli-extensions/security
 https://github.com/thoreinstein/gemini-notifier
 https://github.com/gemini-cli-extensions/postgres
+https://github.com/hashicorp/terraform-mcp-server
