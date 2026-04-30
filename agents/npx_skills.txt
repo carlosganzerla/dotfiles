@@ -1,0 +1,4 @@
+# NPX-based multi-agent skills (one per line)
+# Installed via: npx agent-skills install <name>
+@tech-leads-club/agent-skills
+skills@latest add mattpocock/skills

@@ -1,0 +1,20 @@
+{
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    }
+  },
+  "skillDirectories": [
+    "/home/carlo/.agents/skills",
+    "/home/carlo/.gemini/extensions"
+  ],
+  "model": "claude-opus-4.6",
+  "effortLevel": "high",
+  "allowedUrls": [
+    "https://github.com",
+    "https://raw.githubusercontent.com"
+  ]
+}

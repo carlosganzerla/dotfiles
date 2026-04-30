@@ -1,6 +1,7 @@
 #!/bin/bash
 
-AUR_PACKAGES=$(cat ./programs/.pacmanlistaur)
+DOTFILES_DIR=$HOME/dotfiles
+AUR_PACKAGES=$(cat $DOTFILES_DIR/programs/.pacmanlistaur)
 
 for pkg in $AUR_PACKAGES; do
     if pacman -Qi $pkg &>/dev/null; then

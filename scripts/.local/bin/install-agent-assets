@@ -1,0 +1,89 @@
+#!/bin/bash
+
+DOTFILES_DIR="$HOME/dotfiles"
+AGENTS_DIR="$DOTFILES_DIR/agents"
+
+GIT_SKILLS_FILE="$AGENTS_DIR/git_skills.txt"
+NPX_SKILLS_FILE="$AGENTS_DIR/npx_skills.txt"
+EXTENSIONS_FILE="$AGENTS_DIR/gemini_extensions.txt"
+
+MCPS_FILE="$AGENTS_DIR/mcps.json"
+GEMINI_SETTINGS_SRC="$AGENTS_DIR/gemini_settings.json"
+
+# --- MCP Configuration ---
+
+generate_mcp_configs() {
+    echo "--- Generating MCP configs ---"
+    local mcps
+    mcps=$(cat "$MCPS_FILE")
+
+    # Copilot: mcp-config.json
+    jq -n --argjson servers "$mcps" '{
+      mcpServers: $servers,
+      inputs: [
+        { type: "promptString", id: "tfe_token", description: "Terraform API Token", password: true },
+        { type: "promptString", id: "tfe_address", description: "Terraform Address", password: false }
+      ]
+    }' > "$AGENTS_DIR/.copilot/mcp-config.json"
+    echo "  Written: .copilot/mcp-config.json"
+
+    # Gemini: settings.json (merge settings + mcpServers)
+    jq --argjson mcps "$mcps" '. + { mcpServers: $mcps }' \
+        "$GEMINI_SETTINGS_SRC" > "$AGENTS_DIR/.gemini/settings.json"
+    echo "  Written: .gemini/settings.json"
+}
+
+# --- Skills & Extensions ---
+
+SKILLS_DIR="$HOME/.agents/skills"
+
+install_git_skills() {
+    if [[ ! -f "$GIT_SKILLS_FILE" ]]; then
+        echo "Warning: $GIT_SKILLS_FILE not found. Skipping."
+        return
+    fi
+
+    mkdir -p "$SKILLS_DIR"
+    echo "--- Installing git skills to $SKILLS_DIR ---"
+    while IFS= read -r url || [[ -n "$url" ]]; do
+        [[ -z "$url" || "$url" =~ ^# ]] && continue
+        local name
+        name=$(basename "$url" .git)
+        echo "  $name ($url)"
+        if [[ -d "$SKILLS_DIR/$name" ]]; then
+            git -C "$SKILLS_DIR/$name" pull --quiet
+        else
+            git clone --quiet "$url" "$SKILLS_DIR/$name"
+        fi
+    done < "$GIT_SKILLS_FILE"
+}
+
+install_npx_skills() {
+    if [[ ! -f "$NPX_SKILLS_FILE" ]]; then
+        echo "Warning: $NPX_SKILLS_FILE not found. Skipping."
+        return
+    fi
+
+    echo "--- Installing NPX skills (multi-agent) ---"
+    while IFS= read -r skill || [[ -n "$skill" ]]; do
+        [[ -z "$skill" || "$skill" =~ ^# ]] && continue
+        echo "  $skill"
+        npx -y agent-skills install "$skill"
+    done < "$NPX_SKILLS_FILE"
+}
+
+# --- Main ---
+
+generate_mcp_configs
+install_git_skills
+
+echo "--- Installing Gemini extensions ---"
+while IFS= read -r url || [[ -n "$url" ]]; do
+    [[ -z "$url" || "$url" =~ ^# ]] && continue
+    echo "  $url"
+    gemini extensions install "$url"
+done < "$EXTENSIONS_FILE"
+
+install_npx_skills
+
+echo "--- Agent installation complete ---"

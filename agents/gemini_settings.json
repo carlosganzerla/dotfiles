@@ -1,0 +1,24 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "general": {
+    "vimMode": false,
+    "previewFeatures": true,
+    "preferredEditor": "neovim",
+    "showLineNumbers": false,
+    "sessionRetention": {
+      "enabled": true,
+      "maxAge": "30d",
+      "warningAcknowledged": true
+    }
+  },
+  "ui": {
+    "theme": "Shades Of Purple"
+  },
+  "model": {
+    "name": "gemini-3.1-flash-lite-preview"
+  }
+}
