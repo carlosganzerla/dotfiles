@@ -70,8 +70,43 @@ tfplanvim() {
     fi
 }
 
+tgplanvim() {
+    terragrunt init
+
+    if [ $? -ne 0 ]; then
+        echo "Terraform validation failed. Please fix the issues before running tgplanvim."
+        return 1
+    fi
+
+    local output
+    output=$(terragrunt plan --log-disable -parallelism=100 -out=/tmp/plan.bin 2>&1)
+
+    if [ $? -eq 0 ]; then
+        terragrunt run --log-disable -- show -no-color /tmp/plan.bin | nvim -c 'setlocal buftype=nofile foldmethod=indent' -
+    else
+        echo "$output"
+    fi
+}
+
+tgapply () {
+    terragrunt apply -parallelism=100 $1
+}
+
+tgchanges () {
+    terragrunt plan --all --log-disable -no-color --parallelism=100 2>&1 | grep -E '(^Plan:|^No changes|^Error|will be|must be)'
+}
+
 tfapply () {
-    terraform apply -parallelism=100
+    terraform apply -parallelism=100 $1
+}
+
+pinstall() {
+    poetry install
+    local container
+    container=$(docker ps --filter "volume=$(pwd)" --format '{{.ID}}' | head -n 1)
+    if [ -n "$container" ]; then
+        docker exec "$container" poetry install
+    fi
 }
 
 alias pyblack='poetry run black . --line-length 79'

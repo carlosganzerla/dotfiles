@@ -5,7 +5,9 @@ base
 base-devel
 bash-completion
 bear
+bind
 conky
+cronie
 ctags
 dhcpcd
 discord
@@ -50,7 +52,6 @@ newsboat
 noto-fonts-emoji
 npm
 obsidian
-ollama
 os-prober
 pavucontrol
 pipewire
@@ -72,15 +73,18 @@ sbcl
 scrot
 stow
 sudo
+tailscale
 terraform
+terragrunt
 tflint
 tk
+tree-sitter-cli
 ttf-dejavu
 ttf-nerd-fonts-symbols
 ttf-sazanami
 unzip
 uv
-webkit2gtk
+valkey
 whois
 wireplumber
 woff2-font-awesome

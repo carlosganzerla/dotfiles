@@ -2,6 +2,9 @@ aws-cli-bin
 aws-session-manager-plugin
 bruno-bin
 bruno-bin-debug
+claude-code
+devpod-bin
 git-secret
+github-copilot-cli
 google-chrome
-liquibase
+webkit2gtk
