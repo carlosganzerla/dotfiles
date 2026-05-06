@@ -88,6 +88,49 @@ tgplanvim() {
     fi
 }
 
+tgplanall() {
+    local units=()
+    local failed=()
+
+    if [ $# -gt 0 ]; then
+        units=("$@")
+    else
+        while IFS= read -r -d '' f; do
+            units+=("$(dirname "$f")")
+        done < <(find . -name "terragrunt.hcl" -not -path "*/.terragrunt-cache/*" -print0)
+    fi
+
+    if [ ${#units[@]} -eq 0 ]; then
+        echo "No terragrunt units found."
+        return 1
+    fi
+
+    for unit in "${units[@]}"; do
+        echo "Planning: $unit"
+        local output
+        output=$(cd "$unit" && terragrunt plan --log-disable -parallelism=100 -out=/tmp/plan.bin 2>&1)
+
+        if [ $? -eq 0 ]; then
+            (cd "$unit" && terragrunt run --log-disable -- show -no-color /tmp/plan.bin) > "$unit/plan.txt"
+            echo "  ✓ Plan saved to $unit/plan.txt"
+        else
+            echo "$output" > "$unit/plan.txt"
+            failed+=("$unit")
+            echo "  ✗ FAILED (error saved to $unit/plan.txt)"
+        fi
+    done
+
+    if [ ${#failed[@]} -gt 0 ]; then
+        echo ""
+        echo "Failed units (${#failed[@]}/${#units[@]}):"
+        printf '  - %s\n' "${failed[@]}"
+        return 1
+    fi
+
+    echo ""
+    echo "All ${#units[@]} units planned successfully."
+}
+
 tgapply () {
     terragrunt apply -parallelism=100 $1
 }
@@ -112,6 +155,7 @@ pinstall() {
 alias pyblack='poetry run black . --line-length 79'
 alias display-monitor-only='xrandr --output HDMI-1 --auto && xrandr --output eDP-1 --off'
 alias display-both='xrandr --output eDP-1 --auto && xrandr --output HDMI-1 --left-of eDP-1'
+alias display-notebook-only='xrandr --output eDP-1 --auto && xrandr --output HDMI-1 --off'
 alias rmorigs='find . -name '*.orig' -delete'
 alias penv='eval $(poetry env activate)'
 alias hax='cat ~/shell-tips.txt'
