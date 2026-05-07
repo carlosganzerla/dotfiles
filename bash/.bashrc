@@ -9,10 +9,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-if [ -f ~/.private_envs ]; then
-    . ~/.private_envs
-fi
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
@@ -33,4 +29,6 @@ export UV_USE_IO_URING=0
 export SYSTEMD_EDITOR=nvim
 export PAGER='less -X'
 export EDITOR=nvim
+export JOURNAL_PATH=/home/carlo/accounting
 source /home/carlo/.alude_aliases
+source /usr/share/nvm/init-nvm.sh

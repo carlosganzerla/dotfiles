@@ -11,12 +11,6 @@
     "args": ["mcp-server-git"],
     "command": "uvx"
   },
-  "github": {
-    "headers": {
-      "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
-    },
-    "url": "https://api.githubcopilot.com/mcp/"
-  },
   "memory": {
     "args": ["-y", "@modelcontextprotocol/server-memory"],
     "command": "npx"
