@@ -30,5 +30,5 @@ export SYSTEMD_EDITOR=nvim
 export PAGER='less -X'
 export EDITOR=nvim
 export JOURNAL_PATH=/home/carlo/accounting
+dbus-update-activation-environment --all
 source /home/carlo/.alude_aliases
-source /usr/share/nvm/init-nvm.sh

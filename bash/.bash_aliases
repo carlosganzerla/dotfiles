@@ -159,3 +159,4 @@ alias display-notebook-only='xrandr --output eDP-1 --auto && xrandr --output HDM
 alias rmorigs='find . -name '*.orig' -delete'
 alias penv='eval $(poetry env activate)'
 alias hax='cat ~/shell-tips.txt'
+alias setup-nvm='source /usr/share/nvm/init-nvm.sh'
