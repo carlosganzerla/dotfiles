@@ -22,12 +22,8 @@
     "name": "gemini-3.1-flash-lite-preview"
   },
   "mcpServers": {
-    "chrome-devtools": {
-      "args": [
-        "-y",
-        "chrome-devtools-mcp@latest"
-      ],
-      "command": "npx"
+    "notion": {
+      "url": "https://mcp.notion.com/mcp"
     },
     "fetch": {
       "args": [
@@ -41,21 +37,12 @@
       ],
       "command": "uvx"
     },
-    "github": {
-      "headers": {
-        "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
-      },
-      "url": "https://api.githubcopilot.com/mcp/"
-    },
     "memory": {
       "args": [
         "-y",
         "@modelcontextprotocol/server-memory"
       ],
       "command": "npx"
-    },
-    "sentry": {
-      "url": "https://mcp.sentry.dev/mcp"
     },
     "sequentialthinking": {
       "args": [

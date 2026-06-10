@@ -1,7 +1,6 @@
 {
-  "chrome-devtools": {
-    "args": ["-y", "chrome-devtools-mcp@latest"],
-    "command": "npx"
+  "notion": {
+    "url": "https://mcp.notion.com/mcp"
   },
   "fetch": {
     "args": ["mcp-server-fetch"],
@@ -14,9 +13,6 @@
   "memory": {
     "args": ["-y", "@modelcontextprotocol/server-memory"],
     "command": "npx"
-  },
-  "sentry": {
-    "url": "https://mcp.sentry.dev/mcp"
   },
   "sequentialthinking": {
     "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
@@ -34,9 +30,13 @@
   "terraform": {
     "command": "docker",
     "args": [
-      "run", "-i", "--rm",
-      "-e", "TFE_TOKEN=${input:tfe_token}",
-      "-e", "TFE_ADDRESS=${input:tfe_address}",
+      "run",
+      "-i",
+      "--rm",
+      "-e",
+      "TFE_TOKEN=${input:tfe_token}",
+      "-e",
+      "TFE_ADDRESS=${input:tfe_address}",
       "hashicorp/terraform-mcp-server:0.5.1"
     ]
   }

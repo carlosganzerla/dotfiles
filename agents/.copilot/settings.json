@@ -8,13 +8,17 @@
     }
   },
   "skillDirectories": [
-    "/home/carlo/.agents/skills",
-    "/home/carlo/.gemini/extensions"
+    "/home/carlo/.agents/skills"
   ],
-  "model": "claude-opus-4.6",
-  "effortLevel": "high",
+  "model": "claude-opus-4.8",
   "allowedUrls": [
     "https://github.com",
-    "https://raw.githubusercontent.com"
+    "https://raw.githubusercontent.com",
+    "https://docs.aws.amazon.com",
+    "https://registry.terraform.io",
+    "https://developer.hashicorp.com",
+    "https://docs.brightdata.com",
+    "https://www.google.com",
+    "https://aws.amazon.com"
   ]
 }
