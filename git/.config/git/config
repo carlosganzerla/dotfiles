@@ -8,9 +8,10 @@
 [rerere]
 	enabled = true
 [alias]
-    masterlog = log --oneline --left-right master...HEAD
+    topiclog = log --oneline --left-right devel...HEAD
     graphlog = log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit
     sync-master = !git checkout master && git pull && git rebase devel && git push && git checkout devel
+    devel = !git checkout devel && git pull && git remote prune origin && git prune
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

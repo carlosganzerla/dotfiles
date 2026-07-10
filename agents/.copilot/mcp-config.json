@@ -3,6 +3,10 @@
     "notion": {
       "url": "https://mcp.notion.com/mcp"
     },
+    "celcoin-docs": {
+      "type": "http",
+      "url": "https://celcoin.mcp.kapa.ai"
+    },
     "fetch": {
       "args": [
         "mcp-server-fetch"
