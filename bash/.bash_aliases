@@ -3,14 +3,7 @@ export-env() {
 }
 
 pr-submit() {
-    local sbj=""
-    read -p "Subject: " sbj
-
-    if [ -z "$sbj" ]; then
-        echo "Subject cannot be empty. Aborting PR creation."
-        return 1
-    fi
-    gh pr create --fill --base devel -b "Subject: $sbj"
+    gh pr create --fill --base devel --fill --editor
 }
 
 pyexec () {

@@ -7,4 +7,5 @@ devpod-bin
 git-secret
 github-copilot-cli
 google-chrome
+ngrok
 webkit2gtk
