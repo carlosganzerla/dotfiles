@@ -8,16 +8,24 @@
       "url": "https://celcoin.mcp.kapa.ai"
     },
     "fetch": {
+      "command": "uvx",
       "args": [
+        "--from",
+        "mcp-server-fetch",
+        "--with",
+        "mcp<2",
         "mcp-server-fetch"
-      ],
-      "command": "uvx"
+      ]
     },
     "git": {
+      "command": "uvx",
       "args": [
+        "--from",
+        "mcp-server-git",
+        "--with",
+        "mcp<2",
         "mcp-server-git"
-      ],
-      "command": "uvx"
+      ]
     },
     "memory": {
       "args": [

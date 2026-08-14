@@ -5,10 +5,7 @@ AGENTS_DIR="$DOTFILES_DIR/agents"
 
 GIT_SKILLS_FILE="$AGENTS_DIR/git_skills.txt"
 NPX_SKILLS_FILE="$AGENTS_DIR/npx_skills.txt"
-EXTENSIONS_FILE="$AGENTS_DIR/gemini_extensions.txt"
-
 MCPS_FILE="$AGENTS_DIR/mcps.json"
-GEMINI_SETTINGS_SRC="$AGENTS_DIR/gemini_settings.json"
 
 # --- MCP Configuration ---
 
@@ -26,11 +23,6 @@ generate_mcp_configs() {
       ]
     }' > "$AGENTS_DIR/.copilot/mcp-config.json"
     echo "  Written: .copilot/mcp-config.json"
-
-    # Gemini: settings.json (merge settings + mcpServers)
-    jq --argjson mcps "$mcps" '. + { mcpServers: $mcps }' \
-        "$GEMINI_SETTINGS_SRC" > "$AGENTS_DIR/.gemini/settings.json"
-    echo "  Written: .gemini/settings.json"
 }
 
 # --- Skills & Extensions ---
@@ -68,7 +60,7 @@ install_npx_skills() {
     while IFS= read -r skill || [[ -n "$skill" ]]; do
         [[ -z "$skill" || "$skill" =~ ^# ]] && continue
         echo "  $skill"
-        npx -y agent-skills install "$skill"
+        npx skills add "$skill"
     done < "$NPX_SKILLS_FILE"
 }
 
@@ -76,14 +68,6 @@ install_npx_skills() {
 
 generate_mcp_configs
 install_git_skills
-
-echo "--- Installing Gemini extensions ---"
-while IFS= read -r url || [[ -n "$url" ]]; do
-    [[ -z "$url" || "$url" =~ ^# ]] && continue
-    echo "  $url"
-    gemini extensions install "$url"
-done < "$EXTENSIONS_FILE"
-
 install_npx_skills
 
 echo "--- Agent installation complete ---"
