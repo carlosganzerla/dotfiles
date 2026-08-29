@@ -75,6 +75,7 @@ sbcl
 scrot
 stow
 sudo
+swi-prolog
 tailscale
 terraform
 terragrunt

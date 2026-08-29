@@ -1,3 +1,7 @@
+-- Neovim otherwise treats the ambiguous .pl extension as Perl.
+-- Remove this override if this config also needs to edit Perl files.
+vim.g.filetype_pl = "prolog"
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "[g", function()
 	vim.diagnostic.jump({ count = -1, float = true })
@@ -67,8 +71,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 			vim.lsp.buf.format({
 				filter = function(client)
-					local clients = { "null-ls" }
-					return vim.tbl_contains(clients, client.name)
+					-- prolog_ls provides formatting itself; it is not a none-ls source.
+					local clients = { null_ls = true, prolog_ls = true }
+					return clients[client.name] == true
 				end,
 				bufnr = bufnr,
 			})
@@ -79,7 +84,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Setup mason so it can manage external tooling
 require("mason").setup()
 
-local servers = {
+-- prolog_ls is backed by SWI-Prolog's lsp_server pack, which Mason does not install.
+-- Install it separately with: swipl -q -g "pack_install(lsp_server, [silent(true), interactive(false)]), halt."
+local mason_servers = {
 	"ts_ls",
 	"lua_ls",
 	"pyright",
@@ -91,11 +98,12 @@ local servers = {
 	"cssls",
 	"terraformls",
 }
+local lsp_servers = vim.list_extend(vim.deepcopy(mason_servers), { "prolog_ls" })
 
 -- Ensure the language servers and tools above installed
 require("mason-tool-installer").setup({
 	ensure_installed = {
-		unpack(servers),
+		unpack(mason_servers),
 		"isort",
 		"clang-format",
 		"black",
@@ -147,10 +155,15 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 -- Generic configs
-for _, lsp in ipairs(servers) do
-	vim.lsp.config(lsp, {
+for _, lsp in ipairs(lsp_servers) do
+	local config = {
 		capabilities = capabilities,
-	})
+	}
+	if lsp == "prolog_ls" then
+		-- Include normal Git repositories; the built-in config only looks for pack.pl.
+		config.root_markers = { ".git", "pack.pl" }
+	end
+	vim.lsp.config(lsp, config)
 	vim.lsp.enable(lsp)
 end
 
