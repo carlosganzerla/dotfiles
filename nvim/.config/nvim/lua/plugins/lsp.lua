@@ -71,9 +71,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 			vim.lsp.buf.format({
 				filter = function(client)
-					-- prolog_ls provides formatting itself; it is not a none-ls source.
-					local clients = { null_ls = true, prolog_ls = true }
-					return clients[client.name] == true
+					local clients = { "null-ls", "prolog_ls" }
+					return vim.tbl_contains(clients, client.name)
 				end,
 				bufnr = bufnr,
 			})
@@ -201,5 +200,5 @@ vim.lsp.config("lua_ls", {
 })
 
 vim.g.copilot_settings = {
-  selectedCompletionModel = "gpt-5.2-codex",
+	selectedCompletionModel = "gpt-5.2-codex",
 }
