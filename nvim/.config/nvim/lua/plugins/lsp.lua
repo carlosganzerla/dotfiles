@@ -2,6 +2,13 @@
 -- Remove this override if this config also needs to edit Perl files.
 vim.g.filetype_pl = "prolog"
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "prolog",
+	callback = function(args)
+		vim.bo[args.buf].textwidth = 80
+	end,
+})
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "[g", function()
 	vim.diagnostic.jump({ count = -1, float = true })
@@ -20,6 +27,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local bufnr = args.buf
 		if vim.filetype.match({ filename = args.file }) == "lisp" then
 			return
+		end
+		if vim.bo[bufnr].filetype == "prolog" then
+			-- Use Vim's comment-aware formatter instead of prolog_ls range formatting.
+			vim.bo[bufnr].formatexpr = nil
 		end
 
 		-- NOTE: Remember that lua is a real programming language, and as such it is possible

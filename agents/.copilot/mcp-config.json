@@ -44,7 +44,11 @@
     "awslabs.aws-documentation-mcp-server": {
       "command": "uvx",
       "args": [
-        "awslabs.aws-documentation-mcp-server@latest"
+        "--from",
+        "awslabs.aws-documentation-mcp-server==1.1.30",
+        "--with",
+        "mcp[cli]<2",
+        "awslabs.aws-documentation-mcp-server"
       ],
       "env": {
         "FASTMCP_LOG_LEVEL": "ERROR",
