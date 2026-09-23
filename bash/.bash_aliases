@@ -41,8 +41,9 @@ xact () {
 setup-artifact() {
     export CODEARTIFACT_TOKEN=$(aws --profile alude-sso-dev codeartifact get-authorization-token \
         --domain alude --query authorizationToken --output text) &&
-        poetry config http-basic.codeartifact-read aws $CODEARTIFACT_TOKEN
-    poetry config http-basic.codeartifact-write aws $CODEARTIFACT_TOKEN
+        poetry config keyring.enabled false &&
+        poetry config http-basic.codeartifact-read aws $CODEARTIFACT_TOKEN &&
+        poetry config http-basic.codeartifact-write aws $CODEARTIFACT_TOKEN
 }
 
 tfplanvim() {
