@@ -19,3 +19,5 @@
 	required = true
 [advice]
     skippedCherryPicks = false
+[diff]
+	algorithm = histogram
