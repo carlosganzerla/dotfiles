@@ -1,5 +1,6 @@
 [merge]
 	tool = nvimdiff
+	conflictStyle = zdiff3
 [core]
 	editor = nvim
 	pager = less
