@@ -10,7 +10,7 @@
   "skillDirectories": [
     "/home/carlo/.agents/skills"
   ],
-  "model": "claude-opus-4.8",
+  "model": "gpt-5.6-luna",
   "allowedUrls": [
     "https://github.com",
     "https://raw.githubusercontent.com",
@@ -19,6 +19,9 @@
     "https://developer.hashicorp.com",
     "https://docs.brightdata.com",
     "https://www.google.com",
-    "https://aws.amazon.com"
-  ]
+    "https://aws.amazon.com",
+    "https://developers.celcoin.com.br",
+    "https://www.python-httpx.org"
+  ],
+  "effortLevel": "high"
 }

@@ -11,6 +11,7 @@ conky
 ctags
 dhcpcd
 discord
+djvulibre
 dmenu
 docker
 docker-compose
@@ -79,6 +80,7 @@ tree-sitter-cli
 ttf-dejavu
 ttf-nerd-fonts-symbols
 ttf-sazanami
+unrar
 unzip
 uv
 valkey
