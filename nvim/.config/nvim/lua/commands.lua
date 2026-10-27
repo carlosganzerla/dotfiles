@@ -26,7 +26,7 @@ function psql_query(database, range)
     })
     vim.api.nvim_win_set_buf(win, scratch_bufno)
     vim.cmd("setlocal nowrap")
-    vim.cmd(string.format("execute 'buffer %s | %s'", scratch_bufno, string.format("%%!psql -d %s", database)))
+    vim.cmd(string.format("execute 'buffer %s | %s'", scratch_bufno, string.format("%%!docker compose exec -T postgres-%s psql -U postgres -d %s -c \"$(cat)\"", database, database)))
 end
 
 vim.api.nvim_create_user_command("Psql", function(cmdargs)
